@@ -4,10 +4,10 @@ public class Game {
 
 	public static final int DIM_X = 10;
 	public static final int DIM_Y = 10;
-	public boolean play = true;
-	public int nLevel;
-	public int cycle = 0;
-	public GameObjectContainer gameContainer;
+	private boolean play = true;
+	private int nLevel;
+	private int cycle = 0;
+	private GameObjectContainer gameContainer;
 
 	public Game(int nLevel) {
 		this.nLevel = nLevel;
@@ -27,6 +27,18 @@ public class Game {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	public boolean isPlay() {
+        return play;
+    }
+
+    public int getnLevel() {
+        return nLevel;
+    }
+
+    public GameObjectContainer getGameContainer() {
+        return gameContainer;
+    }
 
 	public int numLemmingsInBoard() {
 		// TODO Auto-generated method stub

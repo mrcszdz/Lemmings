@@ -10,13 +10,27 @@ public class Position {
 	private int col;
 	private int row;
 
+	
+	public Position(int x, int y) {
+		this.col = x;
+		this.row = y;
+	}
 	public int getCol() {
 		return this.col;
 	}
 	
 	public int getRow() {
+		
 		return this.row;
 	}
-
-
+	
+	public void setCol(int n) {
+		this.col = n;
+	}
+	
+	public void setRow(int n) {
+		this.row = n;
+	}
+	
+	
 }
