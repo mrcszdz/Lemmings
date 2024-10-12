@@ -22,12 +22,48 @@ public class Lemming {
 		this.pos = pos;
 		
 	}
+	
+	public Position getPos() {
+        return pos;
+    }
+
+    public boolean isVivo() {
+        return vivo;
+    }
+
+    public Direction getDir() {
+        return dir;
+    }
+    public void setPos(Position pos) {
+    	this.pos = pos;
+    }
+    public int getCaida() {
+        return caida;
+    }
+
+    public WalkerRole getRol() {
+        return rol;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setVivo(boolean vivo) {
+    	this.vivo = vivo;
+    }
+    
+    public void setCaida(int i) {
+    	this.caida = i;
+    }
+    
+    public void setDir(Direction dir) {
+        this.dir = dir;
+    }
+    
 	public void update() {
 		if	(this.vivo) {
-			String accion = this.rol.action(this.pos, this.game.gameContainer.getWalls());
-			if (accion == "caer") {
-				
-			}
+			this.rol.play(this);
 		}
 	}
 	
