@@ -1,22 +1,19 @@
 package tp1.logic.gameobjects;
 
-public class Wall {
-	public int row;
-	public int col;
-	
-	public Wall(int row, int col) {
-		this.row = row;
-		this.col = col;
-	}
-	
-	public int getCol() {
-		return this.col;
-	}
+import tp1.logic.Position;
 
-	public int getRow() {
-		return this.row;
+	public class Wall {
+		private Position pos;
+
+	public Wall(Position pos) {
+		this.pos = pos;
+		}
+	
+	public Position getPos() {
+		return this.pos;
 	}
 }
+	
 
 
 

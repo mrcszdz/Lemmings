@@ -1,11 +1,15 @@
 package tp1.logic.gameobjects;
 
+import tp1.logic.Position;
+
 public class ExitDoor {
-	public int row;
-	public int col;
+	private Position pos;
 	
-	public ExitDoor(int row, int col) {
-		this.row = row;
-		this.col = col;
+	public ExitDoor(Position pos) {
+		this.pos = pos;
+	}
+	
+	public Position getPos () {
+		return this.pos;
 	}
 }
