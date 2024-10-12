@@ -10,7 +10,6 @@ import tp1.util.MyStringUtils;
 public class ConsoleView extends GameView {
 	
 	protected static final String SPACE = " ";
-	private static final String LATERAL_TAB = "  ";
 
 	private static final String CELL_BORDER_CHAR = "—";
 
@@ -19,6 +18,8 @@ public class ConsoleView extends GameView {
 	private static final String NEW_LINE = System.lineSeparator();
 
 	public static final int CELL_SIZE = 5;
+	public static final int LATERAL_TAB_SIZE = 3;
+	private static final String LATERAL_TAB = MyStringUtils.repeat(SPACE, LATERAL_TAB_SIZE);;
 
 	private static final String CELL_BORDER = repeat(CELL_BORDER_CHAR, CELL_SIZE);
 
@@ -26,7 +27,7 @@ public class ConsoleView extends GameView {
 
 	private static final String UPPER_ROW_BORDER = "┌" + ROW_BORDER + "┐" + NEW_LINE;
 	private static final String LOWER_ROW_BORDER = "└" + ROW_BORDER + "┘" + NEW_LINE;
-
+	
 	private static final String TAB = MyStringUtils.repeat(SPACE, CELL_SIZE);
 
 	private static final String INDENTED_UPPER_ROW_BORDER = TAB + UPPER_ROW_BORDER;

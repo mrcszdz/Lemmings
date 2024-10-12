@@ -1,8 +1,10 @@
 package tp1;
 
 import java.util.Locale;
+import java.util.Scanner;
 
 import tp1.control.Controller;
+
 import tp1.logic.Game;
 import tp1.view.ConsoleColorsView;
 import tp1.view.ConsoleView;
@@ -27,7 +29,7 @@ public class Main {
 			if (args.length != 0) nLevel = Integer.parseInt(args[0]);
 
 			Game game = new Game(nLevel);
-			GameView view = new ConsoleView(game);
+			GameView view = new ConsoleColorsView(game);
 			Controller controller = new Controller(game, view);
 			
 			controller.run();

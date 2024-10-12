@@ -1,5 +1,7 @@
 package tp1.control;
 
+import java.util.Scanner;
+
 import tp1.logic.Game;
 import tp1.view.GameView;
 
@@ -10,12 +12,12 @@ public class Controller {
 
 	private Game game;
 	private GameView view;
+	private Scanner scanner = new Scanner(System.in);
 
 	public Controller(Game game, GameView view) {
 		this.game = game;
 		this.view = view;
 	}
-
 	
 	private void getPrompt() {
 		if (this.game.getCycle()==0) {
@@ -23,33 +25,26 @@ public class Controller {
 		}
 		System.out.println("Command > ");
 		
-		boolean valid = false;
-		String command = "";
+		String command = this.getUserCommand(scanner);
 		
-		while (!valid) {
-			this.getUserCommand(command);
-		}
-		
-		if (command == "h") {
+		if (command.equals("h")) {
 			this.commandHelp();
 		}
-		else if (command ==  "r") {
-			//this.game.reset();
+		else if (command.equals("r")) {
+			this.game.reset();
 		}
-		else if (command ==  "e") {
-			//this.game.exit();
+		else if (command.equals("e")) {
+			this.game.exit();
 		}
-		
-		this.update();
+		else this.update();
 		
 	}
 	
-	private boolean getUserCommand(String command) {
-		//ISSUE #1 REGEX INPUT
-		boolean valid = true;
-		command = "h";
-		
-		return valid;
+	private String getUserCommand(Scanner scanner) {
+		String command = "h";
+		//ISSUE #1 REGEX INPUT			
+			command = scanner.next();
+		return command;				
 	}
 	
 	private void commandHelp() {
@@ -57,7 +52,10 @@ public class Controller {
 				+ "[r]eset: start a new game\n"
 				+ "[h]elp: print this help message\n"
 				+ "[e]xit: end the execution of the game\n"
-				+ "[n]one | \"\": skips cycle");
+				+ "[n]one | \"\": skips cycle"
+				+ "\n"
+				+ "\n");
+				
 	}
 	
 	private void update() {
@@ -65,12 +63,13 @@ public class Controller {
 	}
 	
 	public void run() {
-		view.showWelcome();
-		while (this.game.play) {
-			view.showGame();
+		this.view.showWelcome();
+		while (this.game.isPlay()) {
+			this.view.showGame();
 			this.getPrompt();
 		}
-		view.showEndMessage();
+		this.scanner.close();
+		this.view.showEndMessage();
 	}
 
 }
