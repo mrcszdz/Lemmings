@@ -95,7 +95,5 @@ public class GameObjectContainer {
 	
 	public void reset() {
 		this.lemmings.removeAll(this.lemmings);
-//		this.walls.removeAll(this.walls);
-//		this.exitdoors.removeAll(this.exitdoors);
 	}
 }

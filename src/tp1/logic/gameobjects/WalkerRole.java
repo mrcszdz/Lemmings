@@ -6,20 +6,17 @@ import tp1.logic.Direction;
 import tp1.logic.Position;
 
 public class WalkerRole {
-	private String name;
-	
+    
 	public void play(Lemming lemming) {
         List<Wall> walls = lemming.getGame().getGameContainer().getWalls();
         Position pos = lemming.getPos();
         boolean cayendo = true;
 
-        for    (int i = 0; i < walls.size(); i++) {
+        for (int i = 0; i < walls.size(); i++) {
             //Check if it is in the air
-            if((pos.getRow() + 1) == walls.get(i).getPos().getRow() 
-                && pos.getCol() == walls.get(i).getPos().getCol()) {
+            if(pos.translate(Direction.DOWN).equals(walls.get(i).getPos())) {
                 //If it was falling from 3 blocks or more, it dies
                 cayendo = false;
-
             }
         }
         if (!cayendo) {
@@ -29,15 +26,11 @@ public class WalkerRole {
             //If it survived, reset fall momentum and check walls for sideways movement
             else {
                 lemming.setCaida(0);
-
-                int x = lemming.getPos().getCol()+lemming.getDir().getX();
-                int y = lemming.getPos().getRow()+lemming.getDir().getY();
-                Position newPos = new Position(x, y);
+                Position newPos = lemming.getPos().translate(lemming.getDir());
                 boolean pared = false;
 
-                for    (int j = 0; j < walls.size(); j++) {
-                    if(newPos.getRow() == walls.get(j).getPos().getRow() 
-                            && newPos.getCol() == walls.get(j).getPos().getCol()) {
+                for (int j = 0; j < walls.size(); j++) {
+                    if(newPos.equals(walls.get(j).getPos())) {
                         pared = true;
                     }
                 }
@@ -67,18 +60,14 @@ public class WalkerRole {
 		this.move(lemming);
 	}
 	public void move(Lemming lemming) {
-		int x;
-		int y;
+		Position newPos;
 		if(lemming.getCaida() != 0) {
-			x = lemming.getPos().getCol();
-			y = lemming.getPos().getRow()+1;
+            newPos = lemming.getPos().translate(Direction.DOWN);
 		}
 		
 		else {
-			x = lemming.getPos().getCol()+lemming.getDir().getX();
-			y = lemming.getPos().getRow()+lemming.getDir().getY();
+			newPos = lemming.getPos().translate(lemming.getDir());
 		}
-		Position newPos = new Position(x, y);
 		lemming.setPos(newPos);
 	}
 	

@@ -14,7 +14,6 @@ public class Lemming {
 	private WalkerRole rol;
 	private Game game;
 	private boolean escaped;
-	//TODO fill your code
 	
 	public Lemming(Position pos, Game game) {
 		this.vivo = true;
@@ -72,10 +71,9 @@ public class Lemming {
 	public void update() {
 		int i = 0;
 		List<ExitDoor> exitdoors =  this.game.getGameContainer().getExitDoors();
-		if	(this.vivo) {
+		if (this.vivo) {
 			while(i <exitdoors.size() && !this.escaped) {
-				if (this.pos.getCol() == exitdoors.get(i).getPos().getCol() &&
-						this.pos.getRow() == exitdoors.get(i).getPos().getRow()) {
+				if (this.pos.equals(exitdoors.get(i).getPos())) {
 					this.escaped = true;
 				}
 				i++;

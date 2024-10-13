@@ -1,13 +1,11 @@
 package tp1;
 
 import java.util.Locale;
-import java.util.Scanner;
 
 import tp1.control.Controller;
 
 import tp1.logic.Game;
 import tp1.view.ConsoleColorsView;
-import tp1.view.ConsoleView;
 import tp1.view.GameView;
 import tp1.view.Messages;
 
@@ -18,6 +16,7 @@ public class Main {
 	 * 
 	 * @param args Arguments for the game.
 	 */
+	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		// Required to avoid issues with tests
 		// Locale.of("es", "ES");
