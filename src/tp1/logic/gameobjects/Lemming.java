@@ -5,6 +5,7 @@ import java.util.List;
 import tp1.logic.Direction;
 import tp1.logic.Game;
 import tp1.logic.Position;
+import tp1.logic.lemmingRoles.WalkerRole;
 
 public class Lemming {
 	private Position pos; 
@@ -17,7 +18,7 @@ public class Lemming {
 	
 	public Lemming(Position pos, Game game) {
 		this.vivo = true;
-		this.dir = Direction.RIGHT;
+		this.dir = game.getSpawnDir();
 		this.caida = 0;
 		this.rol = new WalkerRole();
 		this.game = game;

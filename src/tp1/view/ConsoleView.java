@@ -11,7 +11,8 @@ public class ConsoleView extends GameView {
 	
 	protected static final String SPACE = " ";
 
-	private static final String CELL_BORDER_CHAR = "-";
+	private static final String CELL_BORDER_CHAR = "—"
+			+ "";
 
 	private static final String VERTICAL_DELIMITER = "|"; // "|";
 
@@ -153,7 +154,7 @@ public class ConsoleView extends GameView {
 		String line = scanner.nextLine();
 		String[] words = line.trim().split("\\s+");
 
-        System.out.println(Messages.DEBUG.formatted(line));		
+//        System.out.println(Messages.DEBUG.formatted(line));		
 
 		return words;
 	}

@@ -32,4 +32,7 @@ public class Position {
 		return this.col == other.col && this.row == other.row;
     }
 	
+	public boolean overflow(int maxX, int maxY) {
+		return ((this.col < 0 || this.col > maxX) || (this.row < 0 || this.row > maxY));
+	}
 }
