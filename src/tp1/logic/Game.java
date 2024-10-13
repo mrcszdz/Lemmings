@@ -18,11 +18,31 @@ public class Game {
 	private Position spawn;
 	private int escaped = 0;
 	private int maxLemmingsDead = 5;
+	private Direction spawnDir;
 
 	public Game(int nLevel) {
 		this.nLevel = nLevel;
 		this.gameContainer = new GameObjectContainer();
-		this.spawn = new Position(3, 3);
+		this.initGame();
+	}
+	
+	public void initGame() {
+		if(this.nLevel == 1) {
+			this.gameContainer.initGame1();
+			this.spawn = new Position(5,0);
+			this.spawnDir = Direction.LEFT;
+		}
+		else if(this.nLevel == 2) {
+			this.gameContainer.initGame2();
+			this.spawn = new Position(8,0);
+			this.spawnDir = Direction.LEFT;
+		}
+		
+		else{
+			this.gameContainer.initGame0();
+			this.spawn = new Position(3,2);
+			this.spawnDir = Direction.RIGHT;
+		}
 	}
 	
 	public void exit() {
@@ -59,6 +79,10 @@ public class Game {
         return nLevel;
     }
 
+    public Direction getSpawnDir() {
+    	return this.spawnDir;
+    }
+    
     public GameObjectContainer getGameContainer() {
         return gameContainer;
     }

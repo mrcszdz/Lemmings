@@ -1,9 +1,12 @@
-package tp1.logic.gameobjects;
+package tp1.logic.lemmingRoles;
 
 import java.util.List;
 
 import tp1.logic.Direction;
+import tp1.logic.Game;
 import tp1.logic.Position;
+import tp1.logic.gameobjects.Lemming;
+import tp1.logic.gameobjects.Wall;
 
 public class WalkerRole {
     
@@ -69,12 +72,25 @@ public class WalkerRole {
 			newPos = lemming.getPos().translate(lemming.getDir());
 		}
 		lemming.setPos(newPos);
+		if(newPos.overflow(Game.DIM_X, Game.DIM_Y)) {
+			lemming.setVivo(false);
+		}
 	}
 	
 	public String getIcon( Lemming lemming ) {
 		String icon = "ᗺ";
+		List<Lemming> lemmings = lemming.getGame().getGameContainer().getLemmings();
+		int count = 0;
 		
-		if(lemming.getDir().equals(Direction.RIGHT)) icon = "B";
+		for	(int i = 0; i < lemmings.size(); i++) {
+			if(lemming.getPos().equals(lemmings.get(i).getPos())) {
+				count++;
+			}
+		}
+		if(count == 2) icon = "Bᗺ";
+		else if(count > 2) icon = Integer.toString(count);
+		
+		else if(lemming.getDir().equals(Direction.RIGHT)) icon = "B";
 		return icon;
 	}
 }
