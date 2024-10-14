@@ -38,9 +38,27 @@ public class Game {
 			this.spawnDir = Direction.LEFT;
 		}
 		
+		else if(this.nLevel == 3) {
+			this.gameContainer.initGame3();
+			this.spawn = new Position(2, 3);
+			this.spawnDir = Direction.RIGHT;
+		}
+		
+		else if(this.nLevel == 4) {
+			this.gameContainer.initGame4();
+			this.spawn = new Position(3, 3);
+			this.spawnDir = Direction.LEFT;
+		}
+		
+		else if(this.nLevel == 5) {
+			this.gameContainer.initGame5();
+			this.spawn = new Position(0, 8);
+			this.spawnDir = Direction.RIGHT;
+		}
+		
 		else{
 			this.gameContainer.initGame0();
-			this.spawn = new Position(3,2);
+			this.spawn = new Position(2, 3);
 			this.spawnDir = Direction.RIGHT;
 		}
 	}
@@ -58,11 +76,11 @@ public class Game {
 	}
 	
 	public void update() {
+		this.gameContainer.update();
 		if(this.cycle % 3 == 0) {
 			Lemming lemming = new Lemming(this.spawn, this);
 			this.gameContainer.add(lemming);
 		}
-		this.gameContainer.update();
 		this.cycle ++;
 		this.play = !this.playerLooses() && !this.playerWins();
 	}

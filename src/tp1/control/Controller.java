@@ -36,8 +36,8 @@ public class Controller {
 		|| command.equals("none") 
 		|| command.equals(" ") 
 		|| command.equals("")) {
-			this.update();
 			Controller.clearScreen();
+			this.update();
 			this.view.showGame();
 		}
 		else {

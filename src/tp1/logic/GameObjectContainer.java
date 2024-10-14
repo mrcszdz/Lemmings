@@ -126,6 +126,144 @@ public class GameObjectContainer {
 
 	}
 	
+	public void initGame3() {
+
+	    for (int col = 8; col <= 10; col++) {
+	        Position position = new Position(col, 1);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+    }
+
+	    for (int col = 2; col <= 4; col++) {
+	        Position position = new Position(col, 4);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+
+	    for (int col = 4; col <= 6; col++) {
+	        Position position = new Position(col, 6);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+	    
+	    for (int col = 7; col <= 7; col++) {
+	        Position position = new Position(col, 7);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+	    
+	    for (int col = 0; col <= 1; col++) {
+	        Position position = new Position(col, 9);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+		
+	    for (int col = 7; col <= 9; col++) {
+	        Position position = new Position(col, 9);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+	    for (int col = 9; col <= 9; col++) {
+	        Position position = new Position(col, 8);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+
+	    Position position = new Position(7,8);
+	    ExitDoor exit = new ExitDoor(position);
+		this.add(exit);
+	}
+	
+	public void initGame4() {
+
+	    for (int col = 8; col <= 10; col++) {
+	        Position position = new Position(col, 1);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+    }
+
+	    for (int col = 2; col <= 4; col++) {
+	        Position position = new Position(col, 4);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+
+	    for (int col = 4; col <= 6; col++) {
+	        Position position = new Position(col, 6);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+	    
+	    for (int col = 7; col <= 7; col++) {
+	        Position position = new Position(col, 7);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+	    
+	    for (int col = 7; col <= 9; col++) {
+	        Position position = new Position(col, 9);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+	    for (int col = 9; col <= 9; col++) {
+	        Position position = new Position(col, 8);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+
+	    Position position = new Position(7,8);
+	    ExitDoor exit = new ExitDoor(position);
+		this.add(exit);
+	}
+	
+	public void initGame5() {
+
+	    for (int col = 8; col <= 10; col++) {
+	        Position position = new Position(col, 1);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+    }
+
+	    for (int col = 2; col <= 4; col++) {
+	        Position position = new Position(col, 4);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+
+	    for (int col = 4; col <= 7; col++) {
+	        Position position = new Position(col, 6);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+	    
+	    for (int col = 7; col <= 7; col++) {
+	        Position position = new Position(col, 5);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+	    
+	    for (int col = 0; col <= 1; col++) {
+	        Position position = new Position(col, 9);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+		
+	    for (int col = 8; col <= 9; col++) {
+	        Position position = new Position(col, 9);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+	    for (int col = 8; col <= 8; col++) {
+	        Position position = new Position(col, 8);
+	        Wall wall = new Wall(position);
+	        this.add(wall);
+	    }
+
+	    Position position = new Position(4,5);
+	    ExitDoor exit = new ExitDoor(position);
+		this.add(exit);
+	}
+	
 	public void add(Lemming lemming) {
 		this.lemmings.add(lemming);
 	}
