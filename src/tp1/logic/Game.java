@@ -3,11 +3,12 @@ package tp1.logic;
 import java.util.List;
 
 import tp1.logic.gameobjects.ExitDoor;
+import tp1.logic.gameobjects.GameObject;
 import tp1.logic.gameobjects.Lemming;
 import tp1.logic.gameobjects.Wall;
 import tp1.view.Messages;
 
-public class Game {
+public class Game implements GameModel, GameStatus, GameWorld {
 
 	public static final int DIM_X = 10;
 	public static final int DIM_Y = 10;
@@ -19,7 +20,7 @@ public class Game {
 	private int escaped = 0;
 	private int maxLemmingsDead = 5;
 	private Direction spawnDir;
-
+	
 	public Game(int nLevel) {
 		this.nLevel = nLevel;
 		this.gameContainer = new GameObjectContainer();
@@ -106,12 +107,12 @@ public class Game {
     }
 
 	public int numLemmingsInBoard() {
-		return this.gameContainer.getLemmings().size() - this.numLemmingsDead();
+		return this.getGameContainer().filterType(Lemming.class).size() - this.numLemmingsDead();
 	}
 
 	public int numLemmingsDead() {
 		int cont = 0;
-		List<Lemming> lemmings = this.gameContainer.getLemmings();
+		List<GameObject> lemmings = this.getGameContainer().filterType(Lemming.class);
 		for	(int i = 0; i < lemmings.size(); i++) {
 			if(!lemmings.get(i).isVivo()) {
 				cont++;
@@ -124,6 +125,34 @@ public class Game {
 		return this.escaped;
 	}
 
+	public boolean isInAir(Position pos) {
+	    List<GameObject> walls = this.getGameContainer().filterType(Wall.class);
+	    int i = 0;
+	    boolean inAir = true;
+	    
+	    while (i < walls.size() && inAir) {
+	        if (pos.translate(Direction.DOWN).equals(walls.get(i).getPos())) {
+	            inAir = false;
+	        }
+	        i++;
+	    }
+	    return inAir;
+	}
+	
+	    public boolean lemmingArrived(Lemming lemming) {
+	        List<GameObject> exitDoors = this.getGameContainer().filterType(ExitDoor.class);
+	        Position pos = lemming.getPos();
+	        int i = 0;
+	        boolean arrived = false;
+	        
+	        while (i < exitDoors.size() && !arrived) {
+	            if (pos.equals(exitDoors.get(i).getPos())) {
+	                arrived = true;
+	            }
+	            i++;
+	        }
+	        return arrived;
+	    }
 
 	public int numLemmingsToWin() {
 		return 2;
@@ -134,26 +163,18 @@ public class Game {
 		Boolean found = false;
 		String ret = Messages.EMPTY;
 		Position targetPos = new Position(col, row);
-		List<Lemming> lemmings = this.gameContainer.getLemmings();
-		List<Wall> walls = this.gameContainer.getWalls();
-		List<ExitDoor> exitdoors = this.gameContainer.getExitDoors();
+		List<GameObject> objects = this.getGameContainer().getObjects();
 		
-		while(i < exitdoors.size() && !found) {
-			found  = exitdoors.get(i).getPos().equals(targetPos);
-			if(found) ret = Messages.EXIT_DOOR;
-			i++;
-		}
-		i = 0;
-		
-		while(i < lemmings.size() && !found) {
-			found  = lemmings.get(i).getPos().equals(targetPos);
-			if(found && lemmings.get(i).isVivo()) ret = lemmings.get(i).getRol().getIcon(lemmings.get(i));
-			i++;
-		}
-		i = 0;
-		while(i < walls.size() && !found) {
-			found  = walls.get(i).getPos().equals(targetPos);
-			if(found) ret = Messages.WALL;
+		while(i < objects.size() && !found) {
+			found  = objects.get(i).getPos().equals(targetPos);
+			if(found) {
+				if(objects.get(i) instanceof Lemming) {
+					Lemming lemmingObject = (Lemming) objects.get(i);
+					ret = lemmingObject.getRol().getIcon(lemmingObject);
+				}
+				else if(objects.get(i) instanceof Wall) ret = Messages.WALL;
+				else if(objects.get(i) instanceof ExitDoor)	 ret = Messages.EXIT_DOOR;
+			} 
 			i++;
 		}
 		
@@ -172,15 +193,4 @@ public class Game {
 	public boolean playerLooses() {
 		return this.numLemmingsDead() >= this.maxLemmingsDead;
 	}
-
-	public String help() {
-		return "Available commands:\n"
-		+ "[r]eset: start a new game\n"
-		+ "[h]elp: print this help message\n"
-		+ "[e]xit: end the execution of the game\n"
-		+ "[n]one | \"\": skips cycle"
-		+ "\n"
-		+ "\n";
-	}
-
 }

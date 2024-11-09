@@ -5,19 +5,12 @@ import java.util.List;
 import tp1.logic.gameobjects.*;
 
 public class GameObjectContainer {
-	private List<Lemming> lemmings;
-	private List<Wall> walls;
-	private List<ExitDoor> exitdoors;
+	
+	private List<GameObject> gameObjects;
+	
 	
 	public GameObjectContainer() {
-		this.lemmings = new ArrayList<Lemming>();
-		this.walls = new ArrayList<Wall>();
-		this.exitdoors = new ArrayList<ExitDoor>();
-		this.generateExitDoor();
-	}
-	
-	private void generateExitDoor() {
-		
+		gameObjects = new ArrayList<>();
 	}
 	
 	public void initGame0() {
@@ -264,33 +257,41 @@ public class GameObjectContainer {
 		this.add(exit);
 	}
 	
-	public void add(Lemming lemming) {
-		this.lemmings.add(lemming);
+	public void add(GameObject gameObject) {
+		this.gameObjects.add(gameObject);
 	}
-	public void add(Wall wall) {
-		this.walls.add(wall);
-	}
-	public void add(ExitDoor exitdoor) {
-		this.exitdoors.add(exitdoor);
-	}
+
 	public void update() {
-		for (int i=0; i<this.lemmings.size(); i++) {
-			this.lemmings.get(i).update();
+		for (int i=0; i<this.gameObjects.size(); i++) {
+			this.gameObjects.get(i).update();
+		}
+		
+		for (int i=0; i<this.gameObjects.size(); i++) {
+			
 		}
 	}
-	public List<Wall> getWalls() {
-		return walls;
+	
+	public List<GameObject> getObjects() {
+		return this.gameObjects;
 	}
 	
-	public List<Lemming> getLemmings() {
-		return lemmings;
-	} 
-	
-	public List<ExitDoor> getExitDoors() {
-		return exitdoors;
-	} 
-	
 	public void reset() {
-		this.lemmings.removeAll(this.lemmings);
+		List<GameObject> newList = new ArrayList<>();
+		for (int i=0; i<this.gameObjects.size(); i++) {
+			if(!(this.gameObjects.get(i) instanceof Lemming)) {
+				newList.add(this.gameObjects.get(i));
+			}
+		}
+		this.gameObjects = newList;
+	}
+	
+	public ArrayList<GameObject> filterType(Class<?> type) {
+		ArrayList<GameObject> newList = new ArrayList<>();
+		for (int i=0; i<this.gameObjects.size(); i++) {
+			if(type.isAssignableFrom(this.gameObjects.get(i).getClass())) {
+				newList.add(this.gameObjects.get(i));
+			}
+		}
+		return newList;
 	}
 }

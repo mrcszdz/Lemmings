@@ -19,29 +19,6 @@ public class Controller {
 		this.view = view;
 	}
 	
-	private void getPrompt() {		
-		String command = this.view.getPrompt()[0].toLowerCase();
-
-		if (command.equals("h") 
-		|| command.equals("help")) {
-			this.commandHelp();
-		}
-		else if () {
-			this.game.reset();
-		}
-		else if () {
-			this.;
-		}
-		else if () {
-			Controller.clearScreen();
-			this.update();
-			this.view.showGame();
-		}
-		else {
-			System.out.println(Messages.ERROR);
-		}
-		
-	}
 
 	public static void clearScreen() {
 		for (int i = 0; i < 50; i++) {
@@ -49,15 +26,6 @@ public class Controller {
 		}
 	}
 
-	private void commandHelp() {
-	
-				
-	}
-	
-	private void update() {
-		this.game.update();
-	}
-	
 	public void run() {
 		this.view.showWelcome();
 		this.view.showGame();
@@ -68,7 +36,7 @@ public class Controller {
 			if (command != null) 
 				command.execute(game, view);
 			else 
-				view.showError(Messages.UNKNOWN_COMMAND.formatted(words[0]));
+				view.showError(Messages.UNKNOWN_COMMAND.formatted(userWords[0]));
 		}
 		this.view.showEndMessage();
 	}
