@@ -1,5 +1,7 @@
 package tp1.control;
 
+import command.Command;
+import command.CommandGenerator;
 import tp1.logic.Game;
 import tp1.view.GameView;
 import tp1.view.Messages;
@@ -24,20 +26,15 @@ public class Controller {
 		|| command.equals("help")) {
 			this.commandHelp();
 		}
-		else if (command.equals("r") 
-		|| command.equals("reset")) {
+		else if () {
 			this.game.reset();
 		}
-		else if (command.equals("e") 
-		|| command.equals("exit")) {
-			this.game.exit();
+		else if () {
+			this.;
 		}
-		else if (command.equals("n") 
-		|| command.equals("none") 
-		|| command.equals(" ") 
-		|| command.equals("")) {
-			this.update();
+		else if () {
 			Controller.clearScreen();
+			this.update();
 			this.view.showGame();
 		}
 		else {
@@ -53,7 +50,7 @@ public class Controller {
 	}
 
 	private void commandHelp() {
-		System.out.println(this.game.help());
+	
 				
 	}
 	
@@ -65,7 +62,13 @@ public class Controller {
 		this.view.showWelcome();
 		this.view.showGame();
 		while (this.game.isPlay()) {
-			this.getPrompt();
+			String[] userWords = this.view.getPrompt();
+			Command command = CommandGenerator.parse(userWords);
+
+			if (command != null) 
+				command.execute(game, view);
+			else 
+				view.showError(Messages.UNKNOWN_COMMAND.formatted(words[0]));
 		}
 		this.view.showEndMessage();
 	}
