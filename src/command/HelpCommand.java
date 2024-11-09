@@ -22,6 +22,6 @@ public class HelpCommand extends NoParamsCommand {
 	
 	
 	public void execute(Game game, GameView gameView) {
-		System.out.println(game.help());
+		System.out.println(CommandGenerator.commandHelp());
 	}
 }

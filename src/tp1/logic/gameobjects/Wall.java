@@ -2,15 +2,14 @@ package tp1.logic.gameobjects;
 
 import tp1.logic.Position;
 
-	public class Wall {
-		private Position pos;
+	public class Wall extends GameObject{
 
 	public Wall(Position pos) {
-		this.pos = pos;
+		super(pos);
 		}
 	
-	public Position getPos() {
-		return this.pos;
+	public void update() {
+		
 	}
 }
 	

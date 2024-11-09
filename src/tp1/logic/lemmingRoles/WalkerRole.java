@@ -5,57 +5,48 @@ import java.util.List;
 import tp1.logic.Direction;
 import tp1.logic.Game;
 import tp1.logic.Position;
+import tp1.logic.gameobjects.ExitDoor;
+import tp1.logic.gameobjects.GameObject;
 import tp1.logic.gameobjects.Lemming;
 import tp1.logic.gameobjects.Wall;
 
 public class WalkerRole {
     
 	public void play(Lemming lemming) {
-        List<Wall> walls = lemming.getGame().getGameContainer().getWalls();
-        Position pos = lemming.getPos();
-        boolean cayendo = true;
+	    Position pos = lemming.getPos();
+	    boolean cayendo = lemming.getGame().isInAir(pos);
 
-        for (int i = 0; i < walls.size(); i++) {
-            //Check if it is in the air
-            if(pos.translate(Direction.DOWN).equals(walls.get(i).getPos())) {
-                //If it was falling from 3 blocks or more, it dies
-                cayendo = false;
-            }
-        }
-        if (!cayendo) {
-            if (lemming.getCaida() > 2) {
-                lemming.setVivo(false);
-            }
-            //If it survived, reset fall momentum and check walls for sideways movement
-            else {
-                lemming.setCaida(0);
-                Position newPos = lemming.getPos().translate(lemming.getDir());
-                boolean pared = false;
+	    if (!cayendo) {
+	        if (lemming.getCaida() > 2) {
+	            lemming.setVivo(false);
+	        } else {
+	            lemming.setCaida(0);
+	            Position newPos = pos.translate(lemming.getDir());
+	            List<GameObject> walls = lemming.getGame().getGameContainer().filterType(Wall.class);
+	            boolean pared = false;
+	            int j = 0;
 
-                for (int j = 0; j < walls.size(); j++) {
-                    if(newPos.equals(walls.get(j).getPos())) {
-                        pared = true;
-                    }
-                }
+	            while (j < walls.size() && !pared) {
+	                if (newPos.equals(walls.get(j).getPos())) {
+	                    pared = true;
+	                }
+	                j++;
+	            }
 
-                if (pared) {
-                    if(lemming.getDir() == Direction.LEFT) {
-                        lemming.setDir(Direction.RIGHT);
-                    }
-                    else {
-                        lemming.setDir(Direction.LEFT);
-                    }
-                }
-                else {
-                    this.move(lemming);
-                }
-            }
-        }
-        //Fall if it is in the air
-        else  {
-            this.caer(lemming);
-        }
-    }
+	            if (pared) {
+	                if (lemming.getDir() == Direction.LEFT) {
+	                    lemming.setDir(Direction.RIGHT);
+	                } else {
+	                    lemming.setDir(Direction.LEFT);
+	                }
+	            } else {
+	                this.move(lemming);
+	            }
+	        }
+	    } else {
+	        this.caer(lemming);
+	    }
+	}
 	
 	public void caer(Lemming lemming) {
 		
@@ -79,7 +70,7 @@ public class WalkerRole {
 	
 	public String getIcon( Lemming lemming ) {
 		String icon = "ᗺ";
-		List<Lemming> lemmings = lemming.getGame().getGameContainer().getLemmings();
+		 List<GameObject> lemmings = lemming.getGame().getGameContainer().filterType(Lemming.class);
 		int count = 0;
 		
 		for	(int i = 0; i < lemmings.size(); i++) {

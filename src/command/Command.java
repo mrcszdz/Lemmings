@@ -4,10 +4,10 @@ import tp1.logic.Game;
 import tp1.view.GameView;
 
 public abstract class Command {
-	private String name;
-	private String shortcut;
-	private String details;
-	private String help;
+	protected String name;
+	protected String shortcut;
+	protected String details;
+	protected String help;
 	
 	public Command(String name, String shortcut, String details, String help) {
 		this.name = name;
