@@ -1,9 +1,7 @@
 package tp1.logic.gameobjects;
 
-import java.util.List;
-
 import tp1.logic.Direction;
-import tp1.logic.Game;
+import tp1.logic.GameStatus;
 import tp1.logic.Position;
 import tp1.logic.lemmingRoles.WalkerRole;
 
@@ -13,7 +11,7 @@ public class Lemming extends GameObject {
 	private WalkerRole rol;
 	private boolean escaped;
 	
-	public Lemming(Position pos, Game game) {
+	public Lemming(Position pos, GameStatus game) {
 		super(pos);
 		this.dir = game.getSpawnDir();
 		this.caida = 0;
@@ -39,7 +37,7 @@ public class Lemming extends GameObject {
         return rol;
     }
 
-    public Game getGame() {
+    public GameStatus getGame() {
         return game;
     }
     
@@ -53,8 +51,14 @@ public class Lemming extends GameObject {
     
 	public void update() {
 		if (this.vivo) {
-			if(!this.getGame().lemmingArrived(this))
-				this.rol.play(this);
+			if(this.getGame().lemmingArrived(this)) {
+                this.getGame().getGameContainer().getObjects().remove(this);
+                this.getGame().addEscaped();
+            }
+            else {
+                this.rol.play(this);
+            }
+				
 		}
 	}
 	

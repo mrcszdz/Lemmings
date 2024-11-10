@@ -139,20 +139,20 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	    return inAir;
 	}
 	
-	    public boolean lemmingArrived(Lemming lemming) {
-	        List<GameObject> exitDoors = this.getGameContainer().filterType(ExitDoor.class);
-	        Position pos = lemming.getPos();
-	        int i = 0;
-	        boolean arrived = false;
-	        
-	        while (i < exitDoors.size() && !arrived) {
-	            if (pos.equals(exitDoors.get(i).getPos())) {
-	                arrived = true;
-	            }
-	            i++;
-	        }
-	        return arrived;
-	    }
+	public boolean lemmingArrived(Lemming lemming) {
+		List<GameObject> exitDoors = this.getGameContainer().filterType(ExitDoor.class);
+		Position pos = lemming.getPos();
+		int i = 0;
+		boolean arrived = false;
+		
+		while (i < exitDoors.size() && !arrived) {
+			if (pos.equals(exitDoors.get(i).getPos())) {
+				arrived = true;
+			}
+			i++;
+		}
+		return arrived;
+	}
 
 	public int numLemmingsToWin() {
 		return 2;

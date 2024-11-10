@@ -1,6 +1,6 @@
 package command;
 
-import tp1.logic.Game;
+import tp1.logic.GameModel;
 import tp1.view.GameView;
 
 public abstract class Command {
@@ -20,7 +20,7 @@ public abstract class Command {
 	
 	public abstract Command parse(String[] input);
 	
-	public abstract void execute(Game game, GameView gameView);
+	public abstract void execute(GameModel game, GameView gameView);
 	
 	public String getName() {
 		return name;

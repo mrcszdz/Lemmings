@@ -1,19 +1,19 @@
 package tp1.logic.gameobjects;
 
-import tp1.logic.Game;
+import tp1.logic.GameStatus;
 import tp1.logic.Position;
 
 public abstract class GameObject {
 	protected Position pos;
 	protected boolean vivo;
-	protected Game game;
+	protected GameStatus game;
 	
 	public GameObject(Position pos) {
 		this.pos = pos;
 		this.vivo = true;
 	}
 	
-	public Game getGame() {
+	public GameStatus getGame() {
 		return this.game;
 	}
 	

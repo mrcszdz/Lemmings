@@ -5,7 +5,6 @@ import java.util.List;
 import tp1.logic.Direction;
 import tp1.logic.Game;
 import tp1.logic.Position;
-import tp1.logic.gameobjects.ExitDoor;
 import tp1.logic.gameobjects.GameObject;
 import tp1.logic.gameobjects.Lemming;
 import tp1.logic.gameobjects.Wall;

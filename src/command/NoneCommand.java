@@ -1,7 +1,7 @@
 package command;
 
 import tp1.control.Controller;
-import tp1.logic.Game;
+import tp1.logic.GameModel;
 import tp1.view.GameView;
 import tp1.view.Messages;
 
@@ -26,7 +26,7 @@ public class NoneCommand {
 		
 		
 		
-		public void execute(Game game, GameView gameView) {
+		public void execute(GameModel game, GameView gameView) {
 			Controller.clearScreen();
 			game.update();
 			gameView.showGame();

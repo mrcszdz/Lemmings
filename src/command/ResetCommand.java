@@ -1,6 +1,6 @@
 package command;
 
-import tp1.logic.Game;
+import tp1.logic.GameModel;
 import tp1.view.GameView;
 import tp1.view.Messages;
 
@@ -21,7 +21,7 @@ public class ResetCommand extends NoParamsCommand {
 	
 	
 	
-	public void execute(Game game, GameView gameView) {
+	public void execute(GameModel game, GameView gameView) {
 		game.reset();
 	}
 }	
