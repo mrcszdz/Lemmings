@@ -92,14 +92,14 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		this.play = !this.playerLooses() && !this.playerWins();
 	}
 	
+	@Override
 	public int getCycle() {
 		return this.cycle;
 	}
-	
+	@Override
 	public boolean isPlay() {
         return play;
     }
-
     public int getnLevel() {
         return nLevel;
     }

@@ -1,10 +1,11 @@
 package tp1.view;
 
 import tp1.logic.Game;
+import tp1.logic.GameStatus;
 
-public abstract class GameView {
+public abstract class GameView{
 
-	protected Game game;
+	protected GameStatus game;
 	
 	public GameView(Game game) {
 		this.game = game;

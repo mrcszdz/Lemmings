@@ -1,16 +1,14 @@
 package tp1.logic.lemmingRoles;
 
-import java.util.List;
-
 import tp1.logic.Direction;
 import tp1.logic.Game;
 import tp1.logic.Position;
 import tp1.logic.gameobjects.ExitDoor;
 import tp1.logic.gameobjects.GameItem;
-import tp1.logic.gameobjects.GameObject;
 import tp1.logic.gameobjects.Lemming;
 import tp1.logic.gameobjects.MetalWall;
 import tp1.logic.gameobjects.Wall;
+import tp1.view.Messages;
 
 public class ParachuteRole implements LemmingRole {
 	public boolean parse(String input) {
@@ -31,6 +29,7 @@ public class ParachuteRole implements LemmingRole {
 
 	}
 	public void caer(Lemming lemming) {
+		System.out.println("FALL");
 		lemming.setCaida(1);
 		this.move(lemming);
 	}
@@ -50,36 +49,23 @@ public class ParachuteRole implements LemmingRole {
 		}
 	}
 	public String getIcon( Lemming lemming ) {
-		String icon = "ᗺP";
-		List<GameObject> objects = lemming.getGame().getGameContainer().getObjects();
-		int count = 0;
-		
-		for	(int i = 0; i < objects.size(); i++) {
-			if(lemming.getPos().equals(objects.get(i).getPos()) && lemming!=objects.get(i)) {
-				count++;
-			}
-		}
-		if(count == 2) icon = "Bᗺ";
-		else if(count > 2) icon = Integer.toString(count);
-		
-		else if(lemming.getDir().equals(Direction.RIGHT)) icon = "BP";
-		return icon;
+		return Messages.LEMMING_PARACHUTE;
 	}
 
 	public boolean receiveInteraction(GameItem other, Lemming lemming) {
-		return true;
+		return false;
 	}
 
 	public boolean interactWith(Lemming receiver, Lemming lemming) {
-		return true;
+		return false;
 	}
 	public boolean interactWith(Wall wall, Lemming lemming) {
-		return true;
+		return false;
 	}
 	public boolean interactWith(ExitDoor door, Lemming lemming) {
-		return true;
+		return false;
 	}
 	public boolean interactWith(MetalWall wall, Lemming lemming) {
-		return true;
+		return false;
 	}
 }

@@ -1,16 +1,14 @@
 package tp1.logic.lemmingRoles;
 
-import java.util.List;
-
 import tp1.logic.Direction;
 import tp1.logic.Game;
 import tp1.logic.Position;
 import tp1.logic.gameobjects.ExitDoor;
 import tp1.logic.gameobjects.GameItem;
-import tp1.logic.gameobjects.GameObject;
 import tp1.logic.gameobjects.Lemming;
 import tp1.logic.gameobjects.MetalWall;
 import tp1.logic.gameobjects.Wall;
+import tp1.view.Messages;
 
 public class DownCaverRole implements LemmingRole{
     public boolean parse(String input) {
@@ -22,7 +20,6 @@ public class DownCaverRole implements LemmingRole{
 	    boolean cayendo = lemming.getGame().isInAir(pos);
 
 	    if (!cayendo) {
-			System.out.println("FLOAT");
 	        if (lemming.getCaida() > 2) {
 	            lemming.setVivo(false);
 				lemming.getGame().lemmingDies();
@@ -32,7 +29,6 @@ public class DownCaverRole implements LemmingRole{
 	            lemming.setCaida(0);
 	        }
 	    } else {
-			System.out.println("DOWN");
 	        this.caer(lemming);
 	    }
 	}
@@ -56,20 +52,7 @@ public class DownCaverRole implements LemmingRole{
 	}
 	
 	public String getIcon( Lemming lemming ) {
-		String icon = "ᗺv";
-		List<GameObject> objects = lemming.getGame().getGameContainer().getObjects();
-		int count = 0;
-		
-		for	(int i = 0; i < objects.size(); i++) {
-			if(lemming.getPos().equals(objects.get(i).getPos()) && lemming!=objects.get(i)) {
-				count++;
-			}
-		}
-		if(count == 2) icon = "Bᗺv";
-		else if(count > 2) icon = Integer.toString(count);
-		
-		else if(lemming.getDir().equals(Direction.RIGHT)) icon = "Bv";
-		return icon;
+		return Messages.LEMMING_DOWN_CAVER;
 	}
 
 	public boolean receiveInteraction(GameItem other, Lemming lemming) {
