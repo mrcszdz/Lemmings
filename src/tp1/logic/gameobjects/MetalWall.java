@@ -3,20 +3,23 @@ package tp1.logic.gameobjects;
 import tp1.logic.Position;
 import tp1.view.Messages;
 
-public class ExitDoor extends GameObject {
+	public class MetalWall extends GameObject{
 
-	public ExitDoor(Position pos) {
+	public MetalWall(Position pos) {
 		super(pos);
-	}
+		}
 	
-	public void update () {
+	public void update() {
 		
 	}
 
 	public String toString() {
-		return Messages.EXIT_DOOR;
+		return Messages.METAL_WALL;
 	}
-	
+
+	public boolean collides(Position pos) {
+        return this.pos.equals(pos);
+    };
 
 	public boolean receiveInteraction(GameItem other) {
         return other.interactWith(this);
@@ -51,3 +54,8 @@ public class ExitDoor extends GameObject {
         return true;
     }
 }
+	
+
+
+
+

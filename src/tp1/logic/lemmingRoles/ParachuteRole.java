@@ -12,24 +12,17 @@ import tp1.logic.gameobjects.Lemming;
 import tp1.logic.gameobjects.MetalWall;
 import tp1.logic.gameobjects.Wall;
 
-public class WalkerRole implements LemmingRole{
-    public boolean parse(String input) {
-		return input.toLowerCase().equals("w") || input.toLowerCase().equals("walker");
+public class ParachuteRole implements LemmingRole {
+	public boolean parse(String input) {
+		return input.toLowerCase().equals("p") || input.toLowerCase().equals("parachute");
 	}
 	public void play(Lemming lemming) {
 	    Position pos = lemming.getPos();
 	    boolean cayendo = lemming.getGame().isInAir(pos);
 
 	    if (!cayendo) {
-	        if (lemming.getCaida() > 2) {
-	            lemming.setVivo(false);
-				lemming.getGame().lemmingDies();
-				lemming.getGame().getGameContainer().getObjects().remove(lemming);
-	        } 
-			else {
-	            lemming.setCaida(0);
-	            this.move(lemming);
-	        }
+			lemming.setCaida(0);
+            lemming.disableRole();
 	    } else {
 	        this.caer(lemming);
 	    }
@@ -38,8 +31,7 @@ public class WalkerRole implements LemmingRole{
 
 	}
 	public void caer(Lemming lemming) {
-		
-		lemming.setCaida(lemming.getCaida()+1);
+		lemming.setCaida(1);
 		this.move(lemming);
 	}
 	public void move(Lemming lemming) {
@@ -57,9 +49,8 @@ public class WalkerRole implements LemmingRole{
 			lemming.getGame().lemmingDies();
 		}
 	}
-	
 	public String getIcon( Lemming lemming ) {
-		String icon = "ᗺ";
+		String icon = "ᗺP";
 		List<GameObject> objects = lemming.getGame().getGameContainer().getObjects();
 		int count = 0;
 		
@@ -71,35 +62,24 @@ public class WalkerRole implements LemmingRole{
 		if(count == 2) icon = "Bᗺ";
 		else if(count > 2) icon = Integer.toString(count);
 		
-		else if(lemming.getDir().equals(Direction.RIGHT)) icon = "B";
+		else if(lemming.getDir().equals(Direction.RIGHT)) icon = "BP";
 		return icon;
 	}
 
 	public boolean receiveInteraction(GameItem other, Lemming lemming) {
-		return false;
+		return true;
 	}
 
 	public boolean interactWith(Lemming receiver, Lemming lemming) {
-		return false;
+		return true;
 	}
 	public boolean interactWith(Wall wall, Lemming lemming) {
-		Position newPos = lemming.getPos().translate(lemming.getDir());
-        boolean collision = newPos.equals(wall.getPos());
-		if (collision) {
-			if (lemming.getDir() == Direction.LEFT) {
-				lemming.setDir(Direction.RIGHT);
-			}
-			else {
-				lemming.setDir(Direction.LEFT);
-			}
-		}
-		return collision;
+		return true;
 	}
 	public boolean interactWith(ExitDoor door, Lemming lemming) {
-		return false;
+		return true;
 	}
-
 	public boolean interactWith(MetalWall wall, Lemming lemming) {
-		return false;
+		return true;
 	}
 }

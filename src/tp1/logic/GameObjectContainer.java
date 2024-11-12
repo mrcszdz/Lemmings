@@ -27,6 +27,12 @@ public class GameObjectContainer {
 	        this.add(wall);
 	    }
 
+		for (int col = 2; col <= 4; col++) {
+	        Position position = new Position(col, 6);
+	        MetalWall wall = new MetalWall(position);
+	        this.add(wall);
+	    }
+
 	    for (int col = 4; col <= 7; col++) {
 	        Position position = new Position(col, 6);
 	        Wall wall = new Wall(position);
@@ -61,7 +67,6 @@ public class GameObjectContainer {
 		this.add(exit);
 	}
 	
-
 	public void initGame1() {
 	    for (int col = 2; col <= 5; col++) {
 	        Position position = new Position(col, 1);
@@ -272,22 +277,15 @@ public class GameObjectContainer {
 	}
 	
 	public void reset() {
-		List<GameObject> newList = new ArrayList<>();
-		for (int i=0; i<this.gameObjects.size(); i++) {
-			if(!(this.gameObjects.get(i) instanceof Lemming)) {
-				newList.add(this.gameObjects.get(i));
-			}
-		}
-		this.gameObjects = newList;
+		this.gameObjects = new ArrayList<>();
 	}
-	
-	public ArrayList<GameObject> filterType(Class<?> type) {
-		ArrayList<GameObject> newList = new ArrayList<>();
+
+	public boolean receiveInteractionsFrom(GameItem obj) {
+		boolean anyInteraction = false;
 		for (int i=0; i<this.gameObjects.size(); i++) {
-			if(type.isAssignableFrom(this.gameObjects.get(i).getClass())) {
-				newList.add(this.gameObjects.get(i));
-			}
+			anyInteraction = anyInteraction || this.gameObjects.get(i).receiveInteraction(obj);
 		}
-		return newList;
+
+		return anyInteraction;
 	}
 }

@@ -96,6 +96,7 @@ public class Messages {
 	public static final String EMPTY = "";
 	public static final String WALL = MyStringUtils.repeat("▓",ConsoleView.CELL_SIZE);
 	public static final String EXIT_DOOR = "🚪";
+	public static final String METAL_WALL = "X";
 	public static final String LEMMING_RIGHT = "B";
 	public static final String LEMMING_LEFT = "ᗺ";
 

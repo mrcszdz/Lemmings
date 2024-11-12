@@ -6,4 +6,6 @@ public interface GameModel {
 	public void reset();
 	public void exit();
 	public int numLemmingsToWin();
+	public Direction getSpawnDir();
+	public GameObjectContainer getGameContainer();
 }

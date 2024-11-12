@@ -2,10 +2,8 @@ package tp1.logic;
 
 import java.util.List;
 
-import tp1.logic.gameobjects.ExitDoor;
 import tp1.logic.gameobjects.GameObject;
 import tp1.logic.gameobjects.Lemming;
-import tp1.logic.gameobjects.Wall;
 import tp1.view.Messages;
 
 public class Game implements GameModel, GameStatus, GameWorld {
@@ -20,6 +18,9 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	private int escaped = 0;
 	private int maxLemmingsDead = 5;
 	private Direction spawnDir;
+
+	private int lemmingsAlive = 0;
+	private int lemmingsDead = 0;
 	
 	public Game(int nLevel) {
 		this.nLevel = nLevel;
@@ -71,6 +72,10 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	
 	public void reset() {
 		this.gameContainer.reset();
+		this.initGame();
+		this.lemmingsAlive = 0;
+		this.lemmingsDead = 0;
+		this.escaped = 0;
 		this.cycle = 0;
 		this.nLevel = 1;
 		System.out.println("Game reseted!");
@@ -78,9 +83,10 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	
 	public void update() {
 		this.gameContainer.update();
-		if(this.cycle % 3 == 0) {
+		if(this.cycle  == 0) {
 			Lemming lemming = new Lemming(this.spawn, this);
 			this.gameContainer.add(lemming);
+			this.lemmingsAlive ++;
 		}
 		this.cycle ++;
 		this.play = !this.playerLooses() && !this.playerWins();
@@ -107,18 +113,16 @@ public class Game implements GameModel, GameStatus, GameWorld {
     }
 
 	public int numLemmingsInBoard() {
-		return this.getGameContainer().filterType(Lemming.class).size() - this.numLemmingsDead();
+		return this.lemmingsAlive;
 	}
 
 	public int numLemmingsDead() {
-		int cont = 0;
-		List<GameObject> lemmings = this.getGameContainer().filterType(Lemming.class);
-		for	(int i = 0; i < lemmings.size(); i++) {
-			if(!lemmings.get(i).isVivo()) {
-				cont++;
-			}
-		}
-		return cont;
+		return this.lemmingsDead;
+	}
+
+	public void lemmingDies() {
+		this.lemmingsDead ++;
+		this.lemmingsAlive --;
 	}
 
 	public int numLemmingsExit() {
@@ -126,12 +130,12 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 
 	public boolean isInAir(Position pos) {
-	    List<GameObject> walls = this.getGameContainer().filterType(Wall.class);
+	    List<GameObject> objects = this.getGameContainer().getObjects();
 	    int i = 0;
 	    boolean inAir = true;
 	    
-	    while (i < walls.size() && inAir) {
-	        if (pos.translate(Direction.DOWN).equals(walls.get(i).getPos())) {
+	    while (i < objects.size() && inAir) {
+	        if (pos.translate(Direction.DOWN).equals(objects.get(i).getPos())) {
 	            inAir = false;
 	        }
 	        i++;
@@ -140,18 +144,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 	
 	public boolean lemmingArrived(Lemming lemming) {
-		List<GameObject> exitDoors = this.getGameContainer().filterType(ExitDoor.class);
-		Position pos = lemming.getPos();
-		int i = 0;
-		boolean arrived = false;
-		
-		while (i < exitDoors.size() && !arrived) {
-			if (pos.equals(exitDoors.get(i).getPos())) {
-				arrived = true;
-			}
-			i++;
-		}
-		return arrived;
+		return lemming.escaped();
 	}
 
 	public int numLemmingsToWin() {
@@ -168,12 +161,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		while(i < objects.size() && !found) {
 			found  = objects.get(i).getPos().equals(targetPos);
 			if(found) {
-				if(objects.get(i) instanceof Lemming) {
-					Lemming lemmingObject = (Lemming) objects.get(i);
-					ret = lemmingObject.getRol().getIcon(lemmingObject);
-				}
-				else if(objects.get(i) instanceof Wall) ret = Messages.WALL;
-				else if(objects.get(i) instanceof ExitDoor)	 ret = Messages.EXIT_DOOR;
+				return objects.get(i).toString();
 			} 
 			i++;
 		}
@@ -183,6 +171,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 	
 	public void addEscaped() {
+		this.lemmingsAlive --;
 		this.escaped++;
 	}
 

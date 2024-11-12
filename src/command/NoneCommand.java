@@ -5,31 +5,28 @@ import tp1.logic.GameModel;
 import tp1.view.GameView;
 import tp1.view.Messages;
 
-public class NoneCommand {
-	public class ResetCommand extends NoParamsCommand {
+public class NoneCommand extends NoParamsCommand{
+	private static final String NAME = Messages.COMMAND_NONE_NAME;
+	private static final String SHORTCUT = Messages.COMMAND_NONE_SHORTCUT;
+	private static final String DETAILS = Messages.COMMAND_NONE_DETAILS;
+	private static final String HELP = Messages.COMMAND_NONE_HELP;
 
-		private static final String NAME = Messages.COMMAND_NONE_NAME;
-		private static final String SHORTCUT = Messages.COMMAND_NONE_SHORTCUT;
-		private static final String DETAILS = Messages.COMMAND_NONE_DETAILS;
-		private static final String HELP = Messages.COMMAND_NONE_HELP;
+	public NoneCommand(){
+		super(NAME, SHORTCUT, DETAILS, HELP);
+	}
 
-		public ResetCommand(){
-			super(NAME, SHORTCUT, DETAILS, HELP);
+	protected boolean matchCommand(String type) {
+		return type.equals("n") 
+		|| type.equals("none") 
+		|| type.equals(" ") 
+		|| type.equals("");
 		}
-
-		protected boolean matchCommand(String type) {
-			return type.equals("n") 
-			|| type.equals("none") 
-			|| type.equals(" ") 
-			|| type.equals("");
-			}
-		
-		
-		
-		public void execute(GameModel game, GameView gameView) {
-			Controller.clearScreen();
-			game.update();
-			gameView.showGame();
-		}
-	}	
+	
+	
+	
+	public void execute(GameModel game, GameView gameView) {
+		Controller.clearScreen();
+		game.update();
+		gameView.showGame();
+	}
 }

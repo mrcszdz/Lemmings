@@ -18,4 +18,5 @@ public interface GameStatus {
 	public boolean isInAir(Position pos);
 	public boolean lemmingArrived(Lemming lemming);
 	public void addEscaped();
+	public void lemmingDies();
 }
