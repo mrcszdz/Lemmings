@@ -43,7 +43,7 @@ public class ParachuteRole implements LemmingRole {
 			newPos = lemming.getPos().translate(lemming.getDir());
 		}
 		lemming.setPos(newPos);
-		if(newPos.overflow(Game.DIM_X, Game.DIM_Y)) {
+		if(newPos.overflowY( Game.DIM_Y)) {
 			lemming.setVivo(false);
 			lemming.getGame().lemmingDies();
 		}

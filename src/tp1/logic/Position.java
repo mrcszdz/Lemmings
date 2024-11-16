@@ -40,7 +40,11 @@ public class Position {
 		return this.col == other.getCol() && this.row == other.getRow();
     }
 	
-	public boolean overflow(int maxX, int maxY) {
-		return ((this.col < 0 || this.col > maxX) || (this.row < 0 || this.row > maxY));
+	public boolean overflowY( int maxY) {
+		return ((this.row < 0) || (this.row > maxY));
+	}
+	
+	public boolean overflowX(int maxX) {
+		return ((this.col < 0) || (this.col > maxX));
 	}
 }
