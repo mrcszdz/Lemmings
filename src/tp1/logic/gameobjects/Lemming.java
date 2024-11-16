@@ -51,6 +51,7 @@ public class Lemming extends GameObject {
     
 	public void update() {
 		if (this.vivo) {
+			System.out.printf("%d %d", this.getDir().getX(), this.getDir().getY());
             boolean interaction = this.game.getGameContainer().receiveInteractionsFrom(this);
             if (!interaction) {
                 this.rol.play(this);
@@ -77,12 +78,12 @@ public class Lemming extends GameObject {
     }
 
     public boolean interactWith(Wall wall) {
-        return this.rol.interactWith(wall, this);
+       if(this.getGame().isInAir(this.pos)) return false;
+       else return this.rol.interactWith(wall, this);
     };
 
     public boolean interactWith(ExitDoor door) {
         if (this.isInPosition(door.getPos())) {
-        	System.out.println("HOla");
             this.getGame().getGameContainer().getObjects().remove(this);
             this.getGame().addEscaped();
             this.escaped = true;

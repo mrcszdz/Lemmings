@@ -18,7 +18,6 @@ public class WalkerRole implements LemmingRole{
 		return input.toLowerCase().equals("w") || input.toLowerCase().equals("walker");
 	}
 	public void play(Lemming lemming) {
-		
 	    Position pos = lemming.getPos();
 	    boolean cayendo = lemming.getGame().isInAir(pos);
 
@@ -40,7 +39,7 @@ public class WalkerRole implements LemmingRole{
 
 	}
 	public void caer(Lemming lemming) {
-		
+		System.out.printf("esta cayendo : %d", lemming.getCaida());
 		lemming.setCaida(lemming.getCaida()+1);
 		this.move(lemming);
 	}

@@ -74,6 +74,11 @@ public class GameObjectContainer {
 	    MetalWall metalWall;
 	    ExitDoor exit;
 
+	    
+	    position = new Position(4, 5);
+	    exit = new ExitDoor(position);
+	    this.add(exit);
+	    
 	    for (int col = 8; col <= 9; col++) {
 	        position = new Position(col, 1);
 	        wall = new Wall(position);
@@ -114,9 +119,7 @@ public class GameObjectContainer {
 	    wall = new Wall(position);
 	    this.add(wall);
 
-	    position = new Position(4, 5);
-	    exit = new ExitDoor(position);
-	    this.add(exit);
+	    
 	}
 
 	public void initGame2() {

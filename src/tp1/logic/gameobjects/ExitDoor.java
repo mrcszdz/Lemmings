@@ -39,7 +39,7 @@ public class ExitDoor extends GameObject {
     }
 
     public boolean isSolid() {
-        return true;
+        return false;
     }
 	public boolean isAlive() {
         return true;

@@ -1,5 +1,6 @@
 package tp1;
 
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.BufferedReader;
@@ -12,7 +13,6 @@ import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.jupiter.api.Test;
 
 public class Tests {
 	public static final String DIR = "tests/pr22/";

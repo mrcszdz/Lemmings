@@ -140,6 +140,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	    
 	    while (i < objects.size() && inAir) {
 	        if (pos.translate(Direction.DOWN).equals(objects.get(i).getPos()) && objects.get(i).isSolid()) {
+	        	System.out.println("Hay suelo");
 	            inAir = false;
 	        }
 	        i++;
