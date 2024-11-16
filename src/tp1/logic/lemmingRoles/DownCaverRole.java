@@ -45,7 +45,7 @@ public class DownCaverRole implements LemmingRole{
 		Position newPos;
 		newPos = lemming.getPos().translate(Direction.DOWN);
 		lemming.setPos(newPos);
-		if(newPos.overflow(Game.DIM_X, Game.DIM_Y)) {
+		if(newPos.overflowY( Game.DIM_Y)) {
 			lemming.setVivo(false);
 			lemming.getGame().lemmingDies();
 		}

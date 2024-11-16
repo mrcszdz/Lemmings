@@ -68,34 +68,55 @@ public class GameObjectContainer {
 	}
 	
 	public void initGame1() {
-	    for (int col = 2; col <= 5; col++) {
-	        Position position = new Position(col, 1);
-	        Wall wall = new Wall(position);
+
+	    Position position;
+	    Wall wall;
+	    MetalWall metalWall;
+	    ExitDoor exit;
+
+	    for (int col = 8; col <= 9; col++) {
+	        position = new Position(col, 1);
+	        wall = new Wall(position);
 	        this.add(wall);
-	    }
-	    
-	    for (int col = 0; col <= 0; col++) {
-	        Position position = new Position(col, 2);
-	        Wall wall = new Wall(position);
-	        this.add(wall);
-	    }
-	    
-	    for (int col = 0; col <= 2; col++) {
-	        Position position = new Position(col, 3);
-	        Wall wall = new Wall(position);
-	        this.add(wall);
-	    }
-	    
-	    for (int col = 2; col <= 6; col++) {
-	        Position position = new Position(col, 4);
-        Wall wall = new Wall(position);
-        this.add(wall);
 	    }
 
-	    Position position = new Position(6,3);
-	    ExitDoor exit = new ExitDoor(position);
-		this.add(exit);
-	
+	    for (int col = 2; col <= 4; col++) {
+	        position = new Position(col, 4);
+	        wall = new Wall(position);
+	        this.add(wall);
+	    }
+
+	    for (int col = 4; col <= 7; col++) {
+	        position = new Position(col, 6);
+	        wall = new Wall(position);
+	        this.add(wall);
+	    }
+	    
+	    for (int col = 7; col <= 7; col++) {
+	        position = new Position(col, 5);
+	        wall = new Wall(position);
+	        this.add(wall);
+	    }
+
+	    for (int col = 0; col <= 1; col++) {
+	        position = new Position(col, 9);
+	        wall = new Wall(position);
+	        this.add(wall);
+	    }
+	    
+	    for (int col = 8; col <= 9; col++) {
+	        position = new Position(col, 9);
+	        wall = new Wall(position);
+	        this.add(wall);
+	    }
+
+	    position = new Position(8, 8);
+	    wall = new Wall(position);
+	    this.add(wall);
+
+	    position = new Position(4, 5);
+	    exit = new ExitDoor(position);
+	    this.add(exit);
 	}
 
 	public void initGame2() {

@@ -82,6 +82,7 @@ public class Lemming extends GameObject {
 
     public boolean interactWith(ExitDoor door) {
         if (this.isInPosition(door.getPos())) {
+        	System.out.println("HOla");
             this.getGame().getGameContainer().getObjects().remove(this);
             this.getGame().addEscaped();
             this.escaped = true;
@@ -95,11 +96,11 @@ public class Lemming extends GameObject {
     }
 
     public boolean interactWith(Lemming lemming) {
-        return lemming.pos.equals(this.pos) && lemming!=this;
+        return false;
     }
 
     public boolean isSolid() {
-        return true;
+        return false;
     }
 	public boolean isAlive() {
         return true;

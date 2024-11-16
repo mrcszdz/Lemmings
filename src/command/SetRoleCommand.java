@@ -52,7 +52,7 @@ public class SetRoleCommand extends Command {
             valid = false;
             System.out.println("[ERROR] Error: Unknown Role");
         }
-        if(this.position.overflow(Game.DIM_X, Game.DIM_Y)) {
+        if(this.position.overflowX(Game.DIM_X) || this.position.overflowY(Game.DIM_Y)) {
 			valid = false;
             System.out.println("[ERROR] Error: SetRoleCommand error (Incorrect position or no object in that position admits that role)");
 		}

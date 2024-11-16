@@ -14,10 +14,9 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	private int nLevel;
 	private int cycle = 0;
 	private GameObjectContainer gameContainer;
-	private Position spawn;
+	private Direction spawnDir; 
 	private int escaped = 0;
 	private int maxLemmingsDead = 5;
-	private Direction spawnDir;
 
 	private int lemmingsAlive = 0;
 	private int lemmingsDead = 0;
@@ -31,37 +30,47 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	public void initGame() {
 		if(this.nLevel == 1) {
 			this.gameContainer.initGame1();
-			this.spawn = new Position(5,0);
-			this.spawnDir = Direction.LEFT;
+			
+			this.spawnDir = Direction.RIGHT;
+			
+			Position pos1 = new Position(2,3);
+			Lemming lemming1 = new Lemming(pos1, this);
+			this.gameContainer.add(lemming1);
+			this.lemmingsAlive ++;
+			
+			Position pos2 = new Position(9,0);
+			Lemming lemming2 = new Lemming(pos2, this);
+			this.gameContainer.add(lemming2);
+			this.lemmingsAlive ++;
+			
+			Position pos3 = new Position(0,8);
+			Lemming lemming3 = new Lemming(pos3, this);
+			this.gameContainer.add(lemming3);
+			this.lemmingsAlive ++;
+			
+			Position pos4 = new Position(3,3);
+			Lemming lemming4 = new Lemming(pos4, this);
+			this.gameContainer.add(lemming4);
+			this.lemmingsAlive ++;
 		}
 		else if(this.nLevel == 2) {
 			this.gameContainer.initGame2();
-			this.spawn = new Position(8,0);
-			this.spawnDir = Direction.LEFT;
 		}
 		
 		else if(this.nLevel == 3) {
 			this.gameContainer.initGame3();
-			this.spawn = new Position(2, 3);
-			this.spawnDir = Direction.RIGHT;
 		}
 		
 		else if(this.nLevel == 4) {
 			this.gameContainer.initGame4();
-			this.spawn = new Position(3, 3);
-			this.spawnDir = Direction.LEFT;
 		}
 		
 		else if(this.nLevel == 5) {
 			this.gameContainer.initGame5();
-			this.spawn = new Position(0, 8);
-			this.spawnDir = Direction.RIGHT;
 		}
 		
 		else{
 			this.gameContainer.initGame0();
-			this.spawn = new Position(2, 3);
-			this.spawnDir = Direction.RIGHT;
 		}
 	}
 	
@@ -83,11 +92,6 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	
 	public void update() {
 		this.gameContainer.update();
-		if(this.cycle  == 0) {
-			Lemming lemming = new Lemming(this.spawn, this);
-			this.gameContainer.add(lemming);
-			this.lemmingsAlive ++;
-		}
 		this.cycle ++;
 		this.play = !this.playerLooses() && !this.playerWins();
 	}
@@ -135,7 +139,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	    boolean inAir = true;
 	    
 	    while (i < objects.size() && inAir) {
-	        if (pos.translate(Direction.DOWN).equals(objects.get(i).getPos())) {
+	        if (pos.translate(Direction.DOWN).equals(objects.get(i).getPos()) && objects.get(i).isSolid()) {
 	            inAir = false;
 	        }
 	        i++;

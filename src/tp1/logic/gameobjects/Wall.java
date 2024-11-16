@@ -17,9 +17,6 @@ import tp1.view.Messages;
 		return Messages.WALL;
 	}
 
-
-
-
 	public boolean receiveInteraction(GameItem other) {
         return other.interactWith(this);
     }

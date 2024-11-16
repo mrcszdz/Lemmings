@@ -11,12 +11,14 @@ import tp1.logic.gameobjects.GameObject;
 import tp1.logic.gameobjects.Lemming;
 import tp1.logic.gameobjects.MetalWall;
 import tp1.logic.gameobjects.Wall;
+import tp1.view.Messages;
 
 public class WalkerRole implements LemmingRole{
     public boolean parse(String input) {
 		return input.toLowerCase().equals("w") || input.toLowerCase().equals("walker");
 	}
 	public void play(Lemming lemming) {
+		
 	    Position pos = lemming.getPos();
 	    boolean cayendo = lemming.getGame().isInAir(pos);
 
@@ -51,10 +53,23 @@ public class WalkerRole implements LemmingRole{
 		else {
 			newPos = lemming.getPos().translate(lemming.getDir());
 		}
-		lemming.setPos(newPos);
-		if(newPos.overflow(Game.DIM_X, Game.DIM_Y)) {
+		
+		if(newPos.overflowY(Game.DIM_Y)) {
+			
 			lemming.setVivo(false);
 			lemming.getGame().lemmingDies();
+		}
+		else if(newPos.overflowX(Game.DIM_X - 1)) {
+			if (lemming.getDir() == Direction.LEFT) {
+				lemming.setDir(Direction.RIGHT);
+			}
+			else {
+				lemming.setDir(Direction.LEFT);
+			}
+		}
+		
+		else {
+			lemming.setPos(newPos);
 		}
 	}
 	
@@ -68,8 +83,8 @@ public class WalkerRole implements LemmingRole{
 				count++;
 			}
 		}
-		if(count == 2) icon = "Bᗺ";
-		else if(count > 2) icon = Integer.toString(count);
+		if(count == 1) icon = "Bᗺ";
+		else if(count > 1) icon = Integer.toString(count);
 		
 		else if(lemming.getDir().equals(Direction.RIGHT)) icon = "B";
 		return icon;

@@ -81,10 +81,6 @@ public class Messages {
 	@Deprecated
 	public static final String HELP = String.join(LINE_SEPARATOR+"   ", HELP_LINES) + LINE_SEPARATOR;
 
-	public static final String COMMAND_RESET_NAME = "reset";
-	public static final String COMMAND_RESET_SHORTCUT = "r";
-	public static final String COMMAND_RESET_DETAILS = "[r]eset";
-	public static final String COMMAND_RESET_HELP = "[r]eset >> resets the game";
 
 	// UPDATE (NONE)
 	public static final String COMMAND_UPDATE_NAME = "none";
@@ -103,6 +99,12 @@ public class Messages {
 	public static final String COMMAND_HELP_SHORTCUT = "h";
 	public static final String COMMAND_HELP_DETAILS = "[h]elp";
 	public static final String COMMAND_HELP_HELP = "print this help message";
+	
+	// RESET
+	public static final String COMMAND_RESET_NAME = "reset";
+	public static final String COMMAND_RESET_SHORTCUT = "r";
+	public static final String COMMAND_RESET_DETAILS = "[r]eset";
+	public static final String COMMAND_RESET_HELP = "reset the game";
 	
 //Roles
 	public static final String WALKER_ROL_SYMBOL = "W";
