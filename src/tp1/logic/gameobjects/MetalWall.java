@@ -14,7 +14,7 @@ import tp1.view.Messages;
 	}
 
 	public String toString() {
-		return Messages.METAL_WALL;
+		return Messages.METALWALL;
 	}
 
 	public boolean collides(Position pos) {

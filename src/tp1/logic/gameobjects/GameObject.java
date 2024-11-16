@@ -1,20 +1,20 @@
 package tp1.logic.gameobjects;
 
-import tp1.logic.GameStatus;
+import tp1.logic.GameWorld;
 import tp1.logic.Position;
 import tp1.logic.lemmingRoles.LemmingRole;
 
 public abstract class GameObject implements GameItem {
 	protected Position pos;
 	protected boolean vivo;
-	protected GameStatus game;
+	protected GameWorld game;
 	
 	public GameObject(Position pos) {
 		this.pos = pos;
 		this.vivo = true;
 	}
 	
-	public GameStatus getGame() {
+	public GameWorld getGame() {
 		return this.game;
 	}
 	

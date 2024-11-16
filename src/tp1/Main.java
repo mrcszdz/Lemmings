@@ -16,7 +16,6 @@ public class Main {
 	 * 
 	 * @param args Arguments for the game.
 	 */
-	@SuppressWarnings("deprecation")
 	public static void main(String[] args) {
 		// Required to avoid issues with tests
 		// Locale.of("es", "ES");

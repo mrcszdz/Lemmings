@@ -11,7 +11,7 @@ public class ConsoleView extends GameView {
 	
 	protected static final String SPACE = " ";
 
-	private static final String CELL_BORDER_CHAR = "—";
+	private static final String CELL_BORDER_CHAR = "-";
 
 	private static final String VERTICAL_DELIMITER = "|"; // "|";
 
@@ -25,8 +25,8 @@ public class ConsoleView extends GameView {
 
 	private static final String ROW_BORDER = repeat(CELL_BORDER, Game.DIM_X);
 
-	private static final String UPPER_ROW_BORDER = "┌" + ROW_BORDER + "┐" + NEW_LINE;
-	private static final String LOWER_ROW_BORDER = "└" + ROW_BORDER + "┘" + NEW_LINE;
+	private static final String UPPER_ROW_BORDER = "o" + ROW_BORDER + "o" + NEW_LINE;
+	private static final String LOWER_ROW_BORDER = "o" + ROW_BORDER + "o" + NEW_LINE;
 	//private static final String TAB = MyStringUtils.repeat(SPACE, CELL_SIZE);
 
 	//private static final String INDENTED_UPPER_ROW_BORDER = TAB + UPPER_ROW_BORDER;

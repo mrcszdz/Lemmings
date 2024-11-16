@@ -17,7 +17,7 @@ public class SetRoleCommand extends Command {
 	private static final String DETAILS =  "[s]et[R]ole | \\\"\\\"\"";
 	private static final String HELP = "[s]et[R]ole ROLE ROW COL: sets the lemming in position (ROW,COL) to role ROLE\r\n" + 
                 "      [P]arachuter: Lemming falls with a parachute\r\n" +
-                "      [W]alker: Lemming that walks" +
+                "      [W]alker: Lemming that walks\n" +
                 "      [D]own[C]aver: Lemming caves downwards";
     private Position position;
     private LemmingRole role;
