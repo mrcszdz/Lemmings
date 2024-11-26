@@ -1,7 +1,9 @@
 package tp1.control.command;
 
+import tp1.exceptions.CommandParseException;
 import tp1.logic.GameModel;
 import tp1.view.GameView;
+import tp1.view.Messages;
 
 public abstract class Command {
 	protected String name;
@@ -18,7 +20,15 @@ public abstract class Command {
 	
 	protected abstract boolean matchCommand(String type);
 	
-	public abstract Command parse(String[] input);
+	 public Command parse(String[] commandWords) throws CommandParseException {
+		 	if (commandWords.length < 1 || !matchCommand(commandWords[0]))
+		 		return null;
+		         
+		 	if (commandWords.length == 1 && matchCommand(commandWords[0]))
+		 		return this;
+		     
+		 	throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
+		 }
 	
 	public abstract void execute(GameModel game, GameView gameView);
 	
