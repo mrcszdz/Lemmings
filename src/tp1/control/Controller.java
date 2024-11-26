@@ -1,7 +1,7 @@
 package tp1.control;
 
-import command.Command;
-import command.CommandGenerator;
+import tp1.control.command.Command;
+import tp1.control.command.CommandGenerator;
 import tp1.logic.GameModel;
 import tp1.view.GameView;
 import tp1.view.Messages;
@@ -19,12 +19,6 @@ public class Controller {
 		this.view = view;
 	}
 	
-
-	public static void clearScreen() {
-		for (int i = 0; i < 50; i++) {
-			System.out.println();
-		}
-	}
 
 	public void run() {
 		this.view.showWelcome();

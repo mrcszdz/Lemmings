@@ -39,7 +39,6 @@ public class WalkerRole implements LemmingRole{
 
 	}
 	public void caer(Lemming lemming) {
-		System.out.printf("esta cayendo : %d", lemming.getCaida());
 		lemming.setCaida(lemming.getCaida()+1);
 		this.move(lemming);
 	}
@@ -82,10 +81,8 @@ public class WalkerRole implements LemmingRole{
 				count++;
 			}
 		}
-		if(count == 1) icon = "Bᗺ";
-		else if(count > 1) icon = Integer.toString(count);
 		
-		else if(lemming.getDir().equals(Direction.RIGHT)) icon = "B";
+		if(lemming.getDir().equals(Direction.RIGHT)) icon = "B";
 		return icon;
 	}
 

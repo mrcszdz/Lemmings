@@ -51,7 +51,7 @@ public class Lemming extends GameObject {
     
 	public void update() {
 		if (this.vivo) {
-			System.out.printf("%d %d", this.getDir().getX(), this.getDir().getY());
+			
             boolean interaction = this.game.getGameContainer().receiveInteractionsFrom(this);
             if (!interaction) {
                 this.rol.play(this);

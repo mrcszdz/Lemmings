@@ -26,7 +26,7 @@ public class Messages {
 	public static final String NUMBER_OF_CYCLES = "Number of cycles: %s";
 	public static final String NUM_LEMMINGS = "Lemmings in board: %s";
 	public static final String DEAD_LEMMINGS = "Dead lemmings: %s";
-	public static final String EXIT_LEMMINGS = "Lemmings exit door: %s ┃%s";
+	public static final String EXIT_LEMMINGS = "Lemmings exit door: %s | %s";
 
 	// GAME END MESSAGE
 	public static final String GAME_OVER = "Game over";
