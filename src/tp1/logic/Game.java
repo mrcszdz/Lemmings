@@ -80,13 +80,13 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 	
 	public void reset() {
-		this.gameContainer.reset();
-		this.initGame();
 		this.lemmingsAlive = 0;
 		this.lemmingsDead = 0;
 		this.escaped = 0;
 		this.cycle = 0;
 		this.nLevel = 1;
+		this.gameContainer.reset();
+		this.initGame();
 		System.out.println("Game reseted!");
 	}
 	
@@ -156,21 +156,28 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 
 	public String positionToString(int col, int row) {
-		int i = 0;
 		Boolean found = false;
 		String ret = Messages.EMPTY;
+		String org = Messages.EMPTY;
+		String lemmins = "";
 		Position targetPos = new Position(col, row);
 		List<GameObject> objects = this.getGameContainer().getObjects();
 		
-		while(i < objects.size() && !found) {
+		for (int i=0; i<objects.size();i++) {
 			found  = objects.get(i).getPos().equals(targetPos);
 			if(found) {
-				return objects.get(i).toString();
+				String c = objects.get(i).toString();
+				ret += c;
+				if ((c=="B") || (c =="ᗺ")) {
+					lemmins += c;
+				}
+				else {
+					org += c;
+				}
 			} 
-			i++;
 		}
 		
-		return ret;
+		return lemmins.length() <3 ? ret : org+lemmins.length();
 
 	}
 	

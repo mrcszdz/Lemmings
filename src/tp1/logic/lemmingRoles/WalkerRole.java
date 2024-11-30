@@ -18,7 +18,6 @@ public class WalkerRole implements LemmingRole{
 		return input.toLowerCase().equals("w") || input.toLowerCase().equals("walker");
 	}
 	public void play(Lemming lemming) {
-		
 	    Position pos = lemming.getPos();
 	    boolean cayendo = lemming.getGame().isInAir(pos);
 
@@ -40,7 +39,6 @@ public class WalkerRole implements LemmingRole{
 
 	}
 	public void caer(Lemming lemming) {
-		
 		lemming.setCaida(lemming.getCaida()+1);
 		this.move(lemming);
 	}
@@ -83,10 +81,8 @@ public class WalkerRole implements LemmingRole{
 				count++;
 			}
 		}
-		if(count == 1) icon = "Bᗺ";
-		else if(count > 1) icon = Integer.toString(count);
 		
-		else if(lemming.getDir().equals(Direction.RIGHT)) icon = "B";
+		if(lemming.getDir().equals(Direction.RIGHT)) icon = "B";
 		return icon;
 	}
 
