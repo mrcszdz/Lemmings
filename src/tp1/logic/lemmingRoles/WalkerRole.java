@@ -71,6 +71,11 @@ public class WalkerRole implements LemmingRole{
 		}
 	}
 	
+	@Override
+	public String toString(){
+		return "Walker";
+	}
+	
 	public String getIcon( Lemming lemming ) {
 		String icon = "ᗺ";
 		List<GameObject> objects = lemming.getGame().getGameContainer().getObjects();

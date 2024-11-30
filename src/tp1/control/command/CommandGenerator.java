@@ -17,22 +17,15 @@ public class CommandGenerator {
         new ExitCommand()
     );
     
-    public static Command parse(String[] commandWords) {
-    	try {
+    public static Command parse(String[] commandWords) throws CommandParseException {
     		int i = 0;
             while (i < AVAILABLE_COMMANDS.size() &&
             		AVAILABLE_COMMANDS.get(i).parse(commandWords) == null) {
             	i++;
             }
-            return i < AVAILABLE_COMMANDS.size() ? AVAILABLE_COMMANDS.get(i) : null; 
-    	}
-    	catch (CommandParseException e) {
-    		System.out.println("PARSE ERROR");
-    		return null;
-    	}
-    	/*final (CommandExecuteException e) {
-    		System.out.println("EXECUTION ERROR");
-    	}*/
+             if (i < AVAILABLE_COMMANDS.size()) return AVAILABLE_COMMANDS.get(i);
+             
+             else throw new CommandParseException(Messages.UNKNOWN_COMMAND.formatted(commandWords[0])); 
     }
     
     public static String commandHelp() {
