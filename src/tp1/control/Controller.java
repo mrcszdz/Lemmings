@@ -2,6 +2,7 @@ package tp1.control;
 
 import tp1.control.command.Command;
 import tp1.control.command.CommandGenerator;
+import tp1.exceptions.CommandException;
 import tp1.logic.GameModel;
 import tp1.view.GameView;
 import tp1.view.Messages;
@@ -21,16 +22,26 @@ public class Controller {
 	
 
 	public void run() {
+			
 		this.view.showWelcome();
 		this.view.showGame();
 		while (this.game.isPlay()) {
-			String[] userWords = this.view.getPrompt();
-			Command command = CommandGenerator.parse(userWords);
-
-			if (command != null) 
-				command.execute(game, view);
-			else 
-				view.showError(Messages.UNKNOWN_COMMAND.formatted(userWords[0]));
+			
+			try {
+				String[] userWords = this.view.getPrompt();
+				Command command = CommandGenerator.parse(userWords);
+		
+				if (command != null)
+					command.execute(game, view);
+				else 
+					view.showError(Messages.UNKNOWN_COMMAND.formatted(userWords[0]));
+			}
+			catch(CommandException e){
+				view.showError(e.getMessage());
+	 			Throwable cause = e.getCause();
+	 			if (cause != null) 
+	 			    view.showError(cause.getMessage());
+			}
 		}
 		this.view.showEndMessage();
 	}

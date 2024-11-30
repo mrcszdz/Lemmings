@@ -28,6 +28,12 @@ public class ParachuteRole implements LemmingRole {
 	public void start( Lemming lemming ) {
 
 	}
+	
+	@Override
+	public String toString(){
+		return "Parachute";
+	}
+	
 	public void caer(Lemming lemming) {
 		System.out.println("FALL");
 		lemming.setCaida(1);

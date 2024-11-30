@@ -32,6 +32,11 @@ public class DownCaverRole implements LemmingRole{
 	        this.caer(lemming);
 	    }
 	}
+	
+	@Override
+	public String toString(){
+		return "DownCaver";
+	}
 
 	public void start( Lemming lemming ) {
 
