@@ -1,5 +1,7 @@
 package tp1.logic.gameobjects;
 
+import tp1.exceptions.ObjectParseException;
+import tp1.exceptions.offBoardException;
 import tp1.logic.GameWorld;
 import tp1.logic.Position;
 import tp1.logic.lemmingRoles.LemmingRole;
@@ -8,6 +10,8 @@ public abstract class GameObject implements GameItem {
 	protected Position pos;
 	protected boolean vivo;
 	protected GameWorld game;
+	
+	public abstract GameObject parse(String[] line, GameWorld game) throws ObjectParseException, offBoardException;
 	
 	public GameObject(Position pos) {
 		this.pos = pos;
@@ -39,4 +43,6 @@ public abstract class GameObject implements GameItem {
 	public boolean setRole(LemmingRole role) {
 		return false;
 	}
+
+	public abstract Boolean toString(String string);
 }

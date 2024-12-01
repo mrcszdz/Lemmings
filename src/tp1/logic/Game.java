@@ -1,25 +1,32 @@
 package tp1.logic;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Scanner;
 
+import tp1.exceptions.GameLoadException;
+import tp1.exceptions.ObjectParseException;
 import tp1.exceptions.offBoardException;
 import tp1.logic.gameobjects.GameObject;
+import tp1.logic.gameobjects.GameObjectFactory;
 import tp1.logic.gameobjects.Lemming;
 import tp1.logic.lemmingRoles.LemmingRole;
 import tp1.view.Messages;
 
-public class Game implements GameModel, GameStatus, GameWorld {
+public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration {
 
 	public static final int DIM_X = 10;
 	public static final int DIM_Y = 10;
 	private boolean play = true;
 	private int nLevel;
-	private int cycle = 0;
+	private int cycle;
 	private GameObjectContainer gameContainer;
 	private Direction spawnDir; 
 	private int escaped = 0;
 	private int maxLemmingsDead = 5;
-
+	private int lemmingsToWin = 2;
 	private int lemmingsAlive = 0;
 	private int lemmingsDead = 0;
 	
@@ -135,6 +142,18 @@ public class Game implements GameModel, GameStatus, GameWorld {
 		return this.escaped;
 	}
 
+	public void load(String fileName) throws GameLoadException {
+		FileGameConfiguration config = new FileGameConfiguration(fileName, this);
+		this.cycle = config.getCycle();
+		this.lemmingsAlive = config.getNumLemmingsBoard();
+		this.lemmingsDead = config.getNumLemmingsDead();
+		this.lemmingsToWin = config.getNumLemmingsToWin();
+		this.escaped = config.getNumLemmingsEscaped();
+		for(int i = 0; i < config.getGameObjects().size(); i++) {
+		this.gameContainer.add(config.getGameObjects().get(i)); 
+		}
+	}
+	
 	public boolean setRole(Position pos, LemmingRole role) throws offBoardException {
 	boolean success = false;
 	int i = 0;
@@ -173,7 +192,7 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 
 	public int numLemmingsToWin() {
-		return 2;
+		return this.lemmingsToWin;
 	}
 
 	public String positionToString(int col, int row) {
@@ -212,6 +231,6 @@ public class Game implements GameModel, GameStatus, GameWorld {
 	}
 
 	public boolean playerLooses() {
-		return this.numLemmingsDead() >= this.maxLemmingsDead;
+		return this.numLemmingsDead() >= this.maxLemmingsDead || this.numLemmingsInBoard() == 0;
 	}
 }

@@ -74,7 +74,7 @@ public class SetRoleCommand extends Command {
         try{
         	game.setRole(this.position, this.role);
         
-            System.out.println("Succesfully set new role. "); 
+            System.out.println("Succesfully set new role."); 
         }catch (GameModelException obe) {
         	throw new CommandExecuteException(obe.getMessage());
         }

@@ -14,6 +14,7 @@ public class CommandGenerator {
     	new UpdateCommand(),
         new ResetCommand(),
         new HelpCommand(),
+        new LoadCommand(),
         new ExitCommand()
     );
     
