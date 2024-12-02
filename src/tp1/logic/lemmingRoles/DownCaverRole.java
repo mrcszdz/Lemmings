@@ -17,6 +17,7 @@ public class DownCaverRole implements LemmingRole{
 	
 	public void play(Lemming lemming) {
 	    Position pos = lemming.getPos();
+        lemming.setCaida(0);
 	    boolean cayendo = lemming.getGame().isInAir(pos);
 
 	    if (!cayendo) {
@@ -25,12 +26,8 @@ public class DownCaverRole implements LemmingRole{
 				lemming.getGame().lemmingDies();
 				lemming.getGame().getGameContainer().getObjects().remove(lemming);
 	        } 
-			else {
-	            lemming.setCaida(0);
-	        }
-	    } else {
-	        this.caer(lemming);
 	    }
+	    this.caer(lemming);
 	}
 	
 	@Override
@@ -42,14 +39,15 @@ public class DownCaverRole implements LemmingRole{
 
 	}
 	public void caer(Lemming lemming) {
-		
 		lemming.setCaida(lemming.getCaida()+1);
 		this.move(lemming);
 	}
 	public void move(Lemming lemming) {
 		Position newPos;
+		lemming.getGame().getGameContainer().receiveInteractionsFrom(lemming);
 		newPos = lemming.getPos().translate(Direction.DOWN);
 		lemming.setPos(newPos);
+
 		if(newPos.overflowY( Game.DIM_Y)) {
 			lemming.setVivo(false);
 			lemming.getGame().lemmingDies();

@@ -176,6 +176,7 @@ public class Lemming extends GameObject {
     @Override
     public boolean setRole(LemmingRole role) {
         this.rol = role;
+        this.rol.play(this);
         return true;
     }
 	
