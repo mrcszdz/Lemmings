@@ -1,8 +1,5 @@
-0 4 0 0 4 
-(3,2) Lemming  RIGHT 0 Walker
-(0,9) Lemming  RIGHT 0 Walker
-(0,0) Lemming  RIGHT 0 Walker
-(0,2) Lemming  RIGHT 0 Walker
+0 4 0 0 4
+(d,0) Lemming  RIGHT d Walker
 (1,0) Wall 
 (1,1) Wall 
 (1,2) Wall 

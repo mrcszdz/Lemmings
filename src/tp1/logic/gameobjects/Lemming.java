@@ -60,33 +60,59 @@ public class Lemming extends GameObject {
 		Position pos;
 		int row, col;
 		
-		String regex = "^\\(-?\\d+,-?\\d+\\)$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(line);
+		String numericRegex = "^\\(-?\\d+,-?\\d+\\)$";
+        String letterRegex = "^\\(?[A-Za-z],?-?\\d+\\)?$";
 
-        if (matcher.matches()) {
-        	row = Integer.parseInt(line.split(",")[0].substring(1));
-    		col = Integer.parseInt(line.split(",")[1].substring(0, line.split(",")[1].length() - 1));
-    		pos = new Position(col, row);
-    		if(pos.overflowX(Game.DIM_X) || pos.overflowY(Game.DIM_Y))
-    			throw new offBoardException("Position %s off the board.".formatted(Messages.POSITION.formatted(pos.getRow(), pos.getCol())));
-    		else return pos;
+        Pattern numericPattern = Pattern.compile(numericRegex);
+        Pattern letterPattern = Pattern.compile(letterRegex);
+
+
+        if (numericPattern.matcher(line).matches()) {
+            row = Integer.parseInt(line.split(",")[0].substring(1));
+            col = Integer.parseInt(line.split(",")[1].substring(0, line.split(",")[1].length() - 1));
+        } 
+        else if (letterPattern.matcher(line).matches()) {
+            try {
+                row = line.split(",")[0].substring(1).toUpperCase().charAt(0)-'A';
+                col = Integer.parseInt(line.split(",")[1].substring(0, line.split(",")[1].length() - 1));
+            }
+            catch (NumberFormatException e) {
+                throw new ObjectParseException("Invalid coordinate format: " + line);
+            }
         } 
         else {
-            throw new ObjectParseException("Formato incorrecto en la posicion");
-        	}  	
+            throw new ObjectParseException("Incorrect position format: " + line);
+        }
+    
+        pos = new Position(col, row);
+    
+        // Validate if position is within the board dimensions
+        if (pos.overflowX(Game.DIM_X) || pos.overflowY(Game.DIM_Y)) {
+            throw new offBoardException("Object position is off board: %s".formatted(Messages.POSITION.formatted(pos.getRow(), pos.getCol())));
+        }
+    
+        return pos;
 	}
 		
 	 private static Direction getLemmingDirectionFrom(String line) throws ObjectParseException { 
-		 if(line.equals("UP")) return Direction.UP;
-		 else if(line.equals("DOWN")) return Direction.DOWN;
-		 else if(line.equals("RIGHT")) return Direction.RIGHT;
+		 if(line.equals("RIGHT")) return Direction.RIGHT;
 		 else if(line.equals("LEFT")) return Direction.LEFT;
-		 else throw new ObjectParseException ("Formato incorrecto en la direccion : "+line);
+         else if (line.equals("UP") || line.equals("DOWN")) throw new ObjectParseException ("Invalid lemming direction: "+line);
+		 else throw new ObjectParseException ("Unknown object direction: "+line);
 	}
 	
 	 private static int getLemmingHeigthFrom(String line) throws ObjectParseException {
-		 return Integer.parseInt(line);
+        try {
+            return Integer.parseInt(line);
+        }
+		catch (NumberFormatException e) {
+            if (line.length()==1) {
+                return line.charAt(0) - 'A';
+            }
+            else {
+                throw new ObjectParseException("Invalid height format : "+line);
+            }
+        }
 	 }
 	 
 	 private static LemmingRole getLemmingRoleFrom(String line) throws ObjectParseException {

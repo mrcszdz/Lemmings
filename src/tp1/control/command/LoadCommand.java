@@ -4,6 +4,7 @@ import tp1.exceptions.CommandExecuteException;
 import tp1.exceptions.GameLoadException;
 import tp1.logic.GameModel;
 import tp1.view.GameView;
+import tp1.view.Messages;
 
 public class LoadCommand extends Command{ 
 private static final String NAME = "Load";
@@ -41,7 +42,7 @@ public void execute(GameModel game, GameView gameView) throws CommandExecuteExce
 		gameView.showGame();
 	}
 	catch(GameLoadException e){
-		throw new CommandExecuteException(e.getMessage());
+		throw new CommandExecuteException("Invalid file \""+this.fileName+"\" configuration\n"+Messages.ERROR.formatted(e.getMessage()));
 	}
 	
 	}

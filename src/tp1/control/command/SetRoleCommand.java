@@ -37,22 +37,22 @@ public class SetRoleCommand extends Command {
 	public Command parse(String[] input) throws CommandParseException{
 		String command = input[0].toLowerCase();
 
-	if (this.matchCommand(command) && input.length==4) {
-		try {	
-			LemmingRole newRole = LemmingRoleFactory.parse(input[1]);
-            Position newPos = new Position(Integer.parseInt(input[2])-1, input[3].charAt(0) - 'A');
-            this.role = newRole;
-            this.position = newPos;
-            return this;
-        	}	
-		catch (NumberFormatException e) {
-        	 throw new CommandParseException(Messages.INVALID_POSITION.formatted(Messages.POSITION.formatted((input[2]).toString(), input[3].toString())));
-        	} 
-		catch (RoleParseException e) {
-			throw new CommandParseException(e.getMessage());
-		}
-		}
-	return null;
+		if (this.matchCommand(command) && input.length==4) {
+			try {	
+				LemmingRole newRole = LemmingRoleFactory.parse(input[1]);
+				Position newPos = new Position(Integer.parseInt(input[2])-1, input[3].charAt(0) - 'A');
+				this.role = newRole;
+				this.position = newPos;
+				return this;
+				}	
+			catch (NumberFormatException e) {
+				throw new CommandParseException(Messages.INVALID_POSITION.formatted(Messages.POSITION.formatted((input[2]).toString(), input[3].toString())));
+				} 
+			catch (RoleParseException e) {
+				throw new CommandParseException(e.getMessage());
+			}
+			}
+		return null;
 	}
 
     protected boolean matchCommand(String type) {

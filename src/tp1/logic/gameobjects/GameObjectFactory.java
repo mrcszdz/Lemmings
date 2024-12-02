@@ -32,7 +32,7 @@ public class GameObjectFactory {
                     throw new offBoardException(e.getMessage());
                 }
             } else {
-                throw new ObjectParseException("El objecto introducido no corresponde con ningun objecto: " + input[1]);
+                throw new ObjectParseException("Unknown game object: " + input[1]);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println(input[1]);

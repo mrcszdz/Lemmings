@@ -20,6 +20,6 @@ public class LemmingRoleFactory {
         }
          if (i < AVAILABLE_ROLES.size())  
         	 return AVAILABLE_ROLES.get(i); 
-        	 else throw new RoleParseException("El rol introducido no corresponde con ningun rol"); 
+        	 else throw new RoleParseException("Invalid lemming role: "+input); 
     }  
 }

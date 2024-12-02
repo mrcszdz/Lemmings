@@ -29,6 +29,7 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 	private int lemmingsToWin = 2;
 	private int lemmingsAlive = 0;
 	private int lemmingsDead = 0;
+	private GameConfiguration conf;
 	
 	public Game(int nLevel) {
 		this.nLevel = nLevel;
@@ -89,14 +90,29 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 	}
 	
 	public void reset() {
-		this.lemmingsAlive = 0;
-		this.lemmingsDead = 0;
-		this.escaped = 0;
-		this.cycle = 0;
-		this.nLevel = 1;
-		this.gameContainer.reset();
-		this.initGame();
-		System.out.println("Game reseted!");
+		if (this.conf == FileGameConfiguration.NONE) {
+			this.lemmingsAlive = 0;
+			this.lemmingsDead = 0;
+			this.escaped = 0;
+			this.cycle = 0;
+			this.nLevel = 1;
+			this.gameContainer.reset();
+			this.initGame();
+			System.out.println("Game reseted!");
+		} 
+		else {
+			this.gameContainer = new GameObjectContainer();
+
+			this.cycle = this.conf.getCycle();
+			this.lemmingsAlive = this.conf.numLemmingsInBoard();
+			this.lemmingsDead = this.conf.numLemmingsDead();
+			this.lemmingsToWin = this.conf.numLemmingsToWin();
+			this.escaped = this.conf.numLemmingsExit();
+
+			for(int i = 0; i < this.conf.getGameContainer().getObjects().size(); i++) {
+				this.gameContainer.add(this.conf.getGameContainer().getObjects().get(i)); 
+			}
+		}
 	}
 	
 	public void update() {
@@ -146,13 +162,15 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 		this.gameContainer = new GameObjectContainer();
 
 		FileGameConfiguration config = new FileGameConfiguration(fileName, this);
+		this.conf = config;
 		this.cycle = config.getCycle();
-		this.lemmingsAlive = config.getNumLemmingsBoard();
-		this.lemmingsDead = config.getNumLemmingsDead();
-		this.lemmingsToWin = config.getNumLemmingsToWin();
-		this.escaped = config.getNumLemmingsEscaped();
-		for(int i = 0; i < config.getGameObjects().size(); i++) {
-		this.gameContainer.add(config.getGameObjects().get(i)); 
+		this.lemmingsAlive = config.numLemmingsInBoard();
+		this.lemmingsDead = config.numLemmingsDead();
+		this.lemmingsToWin = config.numLemmingsToWin();
+		this.escaped = config.numLemmingsExit();
+
+		for(int i = 0; i < config.getGameContainer().getObjects().size(); i++) {
+			this.gameContainer.add(config.getGameContainer().getObjects().get(i)); 
 		}
 	}
 	

@@ -13,8 +13,8 @@ public class CommandGenerator {
     	new SetRoleCommand(),
     	new UpdateCommand(),
         new ResetCommand(),
-        new HelpCommand(),
         new LoadCommand(),
+        new HelpCommand(),
         new ExitCommand()
     );
     
