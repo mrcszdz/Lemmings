@@ -43,9 +43,9 @@ public class Lemming extends GameObject {
 		try{
 			Lemming lemming = new Lemming(Lemming.getPositionFrom(line[0]), 
 		
-				Lemming.getLemmingDirectionFrom(line[2]),
-				Lemming.getLemmingHeigthFrom(line[3]),
-				Lemming.getLemmingRoleFrom(line[4]), game);
+            Lemming.getLemmingDirectionFrom(line[2]),
+            Lemming.getLemmingHeigthFrom(line[3]),
+            Lemming.getLemmingRoleFrom(line[4]), game);
 			return lemming;
 		}
 		catch(ObjectParseException e) {
@@ -67,8 +67,8 @@ public class Lemming extends GameObject {
         if (matcher.matches()) {
         	row = Integer.parseInt(line.split(",")[0].substring(1));
     		col = Integer.parseInt(line.split(",")[1].substring(0, line.split(",")[1].length() - 1));
-    		pos = new Position(row, col);
-    		if(pos.overflowX(col) || pos.overflowY(row))
+    		pos = new Position(col, row);
+    		if(pos.overflowX(Game.DIM_X) || pos.overflowY(Game.DIM_Y))
     			throw new offBoardException("Position %s off the board.".formatted(Messages.POSITION.formatted(pos.getRow(), pos.getCol())));
     		else return pos;
         } 
@@ -78,11 +78,11 @@ public class Lemming extends GameObject {
 	}
 		
 	 private static Direction getLemmingDirectionFrom(String line) throws ObjectParseException { 
-		 if(line == "UP") return Direction.UP;
-		 else if(line == "DOWN") return Direction.DOWN;
-		 else if(line == "RIGHT") return Direction.RIGHT;
-		 else if(line == "LEFT") return Direction.LEFT;
-		 else throw new ObjectParseException ("Formato incorrecto en la direccion");
+		 if(line.equals("UP")) return Direction.UP;
+		 else if(line.equals("DOWN")) return Direction.DOWN;
+		 else if(line.equals("RIGHT")) return Direction.RIGHT;
+		 else if(line.equals("LEFT")) return Direction.LEFT;
+		 else throw new ObjectParseException ("Formato incorrecto en la direccion : "+line);
 	}
 	
 	 private static int getLemmingHeigthFrom(String line) throws ObjectParseException {

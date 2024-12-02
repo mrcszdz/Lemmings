@@ -33,7 +33,7 @@ public class ExitDoor extends GameObject {
         if (matcher.matches()) {
         	row = Integer.parseInt(line.split(",")[0].substring(1));
     		col = Integer.parseInt(line.split(",")[1].substring(0, line.split(",")[1].length() - 1));
-    		pos = new Position(row, col);
+    		pos = new Position(col, row);
     		if(pos.overflowX(Game.DIM_X) || pos.overflowY(Game.DIM_Y))
     			throw new offBoardException("Position %s off the board.".formatted(Messages.POSITION.formatted(pos.getRow(), pos.getCol())));
     		else return pos;

@@ -35,7 +35,7 @@ public class GameObjectFactory {
                 throw new ObjectParseException("El objecto introducido no corresponde con ningun objecto: " + input[1]);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(Arrays.toString(input));
+            System.out.println(input[1]);
             throw new ObjectParseException("Error parsing object: Invalid input format", e);
         }
     }

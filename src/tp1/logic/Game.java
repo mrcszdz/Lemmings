@@ -143,6 +143,8 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 	}
 
 	public void load(String fileName) throws GameLoadException {
+		this.gameContainer = new GameObjectContainer();
+
 		FileGameConfiguration config = new FileGameConfiguration(fileName, this);
 		this.cycle = config.getCycle();
 		this.lemmingsAlive = config.getNumLemmingsBoard();

@@ -2,6 +2,7 @@ package tp1.logic;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,7 +14,7 @@ import tp1.logic.gameobjects.GameObjectFactory;
 
 public class FileGameConfiguration {
 	private int cycle, numLemmingsBoard, numLemmingsDead, numLemmingsEscaped, numLemmingsToWin;
-	private List<GameObject> gameObjects;
+	private List<GameObject> gameObjects = new ArrayList<>();
 	private String fileName;
 	private GameWorld game;
 	
@@ -64,9 +65,9 @@ public class FileGameConfiguration {
                 numLemmingsToWin = Integer.parseInt(objectInfo [4]);
                 while (s.hasNextLine()) {
                     line = s.nextLine();
-                objectInfo = line.split(" ");
-                GameObject objeto = GameObjectFactory.parse(objectInfo, game);
-                gameObjects.add(objeto);
+					objectInfo = line.split("\\s+");
+					GameObject objeto = GameObjectFactory.parse(objectInfo, game);
+					gameObjects.add(objeto);
                 }	
 			} 
 			catch (FileNotFoundException fnf) { 
