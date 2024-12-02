@@ -67,13 +67,10 @@ public class SetRoleCommand extends Command {
 	    if (this.position.overflowX(Game.DIM_X) || this.position.overflowY(Game.DIM_Y)) {
 	        throw new CommandExecuteException("SetRoleCommand error (Incorrect position or no object in that position admits that role)");
 	    }
-	    
-        
-        gameView.showGame();
         
         try{
         	game.setRole(this.position, this.role);
-        
+        	gameView.showGame();
             System.out.println("Succesfully set new role."); 
         }catch (GameModelException obe) {
         	throw new CommandExecuteException(obe.getMessage());
