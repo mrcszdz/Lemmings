@@ -77,7 +77,7 @@ public class SetRoleCommand extends Command {
 				System.out.println("Successfully set new role");
 			}
         	else {
-				System.out.println(Messages.ERROR.formatted("No uwu lemming in position %s admits role %s".formatted(Messages.POSITION.formatted(position.getRow(), position.getCol()), role)));
+				System.out.println(Messages.ERROR.formatted("No lemming in position %s admits role %s".formatted(Messages.POSITION.formatted(position.getRow(), position.getCol()), role)));
 			}
         }catch (GameModelException obe) {
         	throw new CommandExecuteException(obe.getMessage());
