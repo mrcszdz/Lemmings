@@ -13,6 +13,8 @@ public abstract class GameObject implements GameItem {
 	
 	public abstract GameObject parse(String[] line, GameWorld game) throws ObjectParseException, offBoardException;
 	
+	public abstract GameObject deepCopy();
+
 	public GameObject(Position pos) {
 		this.pos = pos;
 		this.vivo = true;

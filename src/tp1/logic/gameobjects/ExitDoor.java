@@ -16,6 +16,12 @@ public class ExitDoor extends GameObject {
 	public ExitDoor(Position pos) {
 		super(pos);
 	}
+
+    public ExitDoor deepCopy() {
+        ExitDoor copy = new ExitDoor(pos);
+        return copy;
+    }
+
 	
 	public GameObject parse(String[] line, GameWorld game) throws ObjectParseException, offBoardException{
 		ExitDoor exit = new ExitDoor(ExitDoor.getPositionFrom(line[0]));

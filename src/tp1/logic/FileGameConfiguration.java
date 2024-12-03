@@ -19,6 +19,10 @@ public class FileGameConfiguration implements GameConfiguration {
 	private GameWorld game;
 	public static final GameConfiguration NONE = new FileGameConfiguration();
 
+	public String getFile() {
+		return fileName;
+	}
+
 	public int getCycle() {
 		return cycle;
 	}
@@ -40,7 +44,12 @@ public class FileGameConfiguration implements GameConfiguration {
 	}
 
 	public GameObjectContainer getGameContainer() {
-		return gameObjectContainer;
+		GameObjectContainer copy = new GameObjectContainer();
+		for (int i=0; i<gameObjectContainer.getObjects().size(); i++) {
+			GameObject objectCopy = gameObjectContainer.getObjects().get(i).deepCopy();
+			copy.add(objectCopy);
+		}
+        return copy;
 	}
 
 	public String getFileName() {

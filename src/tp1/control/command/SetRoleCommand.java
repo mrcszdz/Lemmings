@@ -40,7 +40,9 @@ public class SetRoleCommand extends Command {
 		if (this.matchCommand(command) && input.length==4) {
 			try {	
 				LemmingRole newRole = LemmingRoleFactory.parse(input[1]);
-				Position newPos = new Position(Integer.parseInt(input[2])-1, input[3].charAt(0) - 'A');
+				int row = (input[2].toUpperCase().charAt(0)-'A');
+				int col = Integer.parseInt(input[3])-1;
+				Position newPos = new Position(col, row);
 				this.role = newRole;
 				this.position = newPos;
 				return this;
@@ -69,9 +71,14 @@ public class SetRoleCommand extends Command {
 	    }
         
         try{
-        	game.setRole(this.position, this.role);
-        	gameView.showGame();
-            System.out.println("Succesfully set new role."); 
+			if (game.setRole(this.position, this.role)) {
+				game.update();
+        		gameView.showGame();
+				System.out.println("Successfully set new role");
+			}
+        	else {
+				System.out.println(Messages.ERROR.formatted("No uwu lemming in position %s admits role %s".formatted(Messages.POSITION.formatted(position.getRow(), position.getCol()), role)));
+			}
         }catch (GameModelException obe) {
         	throw new CommandExecuteException(obe.getMessage());
         }

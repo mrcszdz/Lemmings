@@ -15,6 +15,11 @@ import tp1.view.Messages;
 	public MetalWall(Position pos) {
 		super(pos);
 		}
+    
+    public MetalWall deepCopy() {
+        MetalWall copy = new MetalWall(pos);
+        return copy;
+    }
 	
 	public GameObject parse(String[] line, GameWorld game) throws ObjectParseException, offBoardException{
 		MetalWall Metal = new MetalWall(MetalWall.getPositionFrom(line[0]));

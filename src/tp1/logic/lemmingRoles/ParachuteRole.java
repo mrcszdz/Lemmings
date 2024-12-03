@@ -35,7 +35,6 @@ public class ParachuteRole implements LemmingRole {
 	}
 	
 	public void caer(Lemming lemming) {
-		System.out.println("FALL");
 		lemming.setCaida(1);
 		this.move(lemming);
 	}
@@ -44,7 +43,6 @@ public class ParachuteRole implements LemmingRole {
 		if(lemming.getCaida() != 0) {
             newPos = lemming.getPos().translate(Direction.DOWN);
 		}
-		
 		else {
 			newPos = lemming.getPos().translate(lemming.getDir());
 		}

@@ -16,6 +16,11 @@ import tp1.view.Messages;
 		super(pos);
 		}
 	
+    public Wall deepCopy() {
+        Wall copy = new Wall(pos);
+        return copy;
+    }
+
 	public GameObject parse(String[] line, GameWorld game) throws ObjectParseException, offBoardException{
 		Wall wall = new Wall(Wall.getPositionFrom(line[0]));
 		return wall;
@@ -43,7 +48,6 @@ import tp1.view.Messages;
 	}
 	
 	public void update() {
-		
 	}
 
 	@Override

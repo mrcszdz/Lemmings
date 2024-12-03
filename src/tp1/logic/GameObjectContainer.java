@@ -294,6 +294,11 @@ public class GameObjectContainer {
 		for (int i=0; i<this.gameObjects.size(); i++) {
 			this.gameObjects.get(i).update();
 		}
+		for (int i=0; i<this.gameObjects.size(); i++) {
+			if (!this.gameObjects.get(i).isVivo()) {
+				this.gameObjects.remove(i);
+			}
+		}
 	}
 	
 	public List<GameObject> getObjects() {

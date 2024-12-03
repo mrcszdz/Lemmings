@@ -30,6 +30,11 @@ public class Lemming extends GameObject {
 		this.escaped = false;		
 	}
 	
+    public Lemming deepCopy() {
+        Lemming copy = new Lemming(pos, dir, caida, rol, game);
+        return copy;
+    }
+
 	public Lemming(Position pos, Direction dir, int caida, LemmingRole rol, GameWorld game) {
 		super(pos);
 		this.dir = dir;
@@ -155,7 +160,6 @@ public class Lemming extends GameObject {
     
 	public void update() {
 		if (this.vivo) {
-			
             boolean interaction = this.game.getGameContainer().receiveInteractionsFrom(this);
             if (!interaction) {
                 this.rol.play(this);
@@ -176,7 +180,6 @@ public class Lemming extends GameObject {
     @Override
     public boolean setRole(LemmingRole role) {
         this.rol = role;
-        this.rol.play(this);
         return true;
     }
 	

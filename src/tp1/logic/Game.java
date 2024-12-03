@@ -29,7 +29,7 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 	private int lemmingsToWin = 2;
 	private int lemmingsAlive = 0;
 	private int lemmingsDead = 0;
-	private GameConfiguration conf;
+	private GameConfiguration conf = FileGameConfiguration.NONE;
 	
 	public Game(int nLevel) {
 		this.nLevel = nLevel;
@@ -95,7 +95,6 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 			this.lemmingsDead = 0;
 			this.escaped = 0;
 			this.cycle = 0;
-			this.nLevel = 1;
 			this.gameContainer.reset();
 			this.initGame();
 			System.out.println("Game reseted!");
@@ -108,7 +107,7 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 			this.lemmingsDead = this.conf.numLemmingsDead();
 			this.lemmingsToWin = this.conf.numLemmingsToWin();
 			this.escaped = this.conf.numLemmingsExit();
-
+			
 			for(int i = 0; i < this.conf.getGameContainer().getObjects().size(); i++) {
 				this.gameContainer.add(this.conf.getGameContainer().getObjects().get(i)); 
 			}
@@ -180,18 +179,15 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 	
 	List<GameObject> objects = this.getGameContainer().getObjects();
      
-	if(pos.overflowX(Game.DIM_X) || pos.overflowY(Game.DIM_Y))
-	throw new offBoardException("Position %s off the board.".formatted(Messages.POSITION.formatted(pos.getRow(), pos.getCol())));
+	if(pos.overflowX(Game.DIM_X) || pos.overflowY(Game.DIM_Y)) throw new offBoardException("Position %s off the board.".formatted(Messages.POSITION.formatted(pos.getRow(), pos.getCol())));
 	while (i < objects.size() && !success) {
-         if (pos.equals(objects.get(i).getPos())) {
-             success = objects.get(i).setRole(role);
-         }
-         i++;
-     	}
-	if(!success) 
-		throw new offBoardException("No lemming in position %s admits role %s".formatted(Messages.POSITION.formatted(pos.getRow(), pos.getCol()), role));
-     	return true;
-     }
+		if (pos.equals(objects.get(i).getPos())) {
+			success = objects.get(i).setRole(role);
+		}
+		i++;
+    }
+	return success;
+    }
 	
 	public boolean isInAir(Position pos) {
 	    List<GameObject> objects = this.getGameContainer().getObjects();

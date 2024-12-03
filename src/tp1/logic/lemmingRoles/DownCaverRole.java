@@ -69,7 +69,7 @@ public class DownCaverRole implements LemmingRole{
 		Position newPos = lemming.getPos().translate(Direction.DOWN);
         boolean breakable = newPos.equals(wall.getPos());
 		if (breakable) {
-			lemming.getGame().getGameContainer().getObjects().remove(wall);
+			wall.setVivo(false);
 		}
 		return false;
 	}
