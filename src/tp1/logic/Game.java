@@ -233,7 +233,7 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 			} 
 		}
 		
-		return lemmins.length() <3 ? ret : org+lemmins.length();
+		return lemmins.length() < 3 ? ret : org+lemmins.length();
 
 	}
 	

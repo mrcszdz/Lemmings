@@ -302,11 +302,16 @@ public class GameObjectContainer {
 	}
 	
 	public List<GameObject> getObjects() {
-		return this.gameObjects;
+		List<GameObject> copy = new ArrayList<GameObject>();
+		for (int i=0; i<this.gameObjects.size(); i++) {
+			GameObject objectCopy = this.gameObjects.get(i).deepCopy();
+			copy.add(objectCopy);
+		}
+        return copy;
 	}
 	
 	public void reset() {
-		this.gameObjects = new ArrayList<>();
+		this.gameObjects.clear();
 	}
 
 	public boolean receiveInteractionsFrom(GameItem obj) {

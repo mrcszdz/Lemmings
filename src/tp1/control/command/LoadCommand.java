@@ -33,7 +33,7 @@ return null;
 }
 
 protected boolean matchCommand(String type) {
-	return type.equals("l") || type.equals("l") || type.equals("load");
+	return type.equals("l") || type.equals("load");
 }
 
 public void execute(GameModel game, GameView gameView) throws CommandExecuteException{
