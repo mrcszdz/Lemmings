@@ -17,6 +17,10 @@ public class ExitDoor extends GameObject {
 		super(pos);
 	}
 
+	public ExitDoor() {
+		super(null);
+	}
+	
     public ExitDoor deepCopy() {
         ExitDoor copy = new ExitDoor(pos);
         return copy;

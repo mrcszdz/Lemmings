@@ -12,10 +12,10 @@ public class GameObjectFactory {
 
     public static GameObject parse(String[] input, GameWorld game) throws ObjectParseException, offBoardException {
         List<GameObject> AVAILABLE_OBJECTS = Arrays.asList(
-            new Wall(new Position(0,0)),
-            new Lemming(new Position(0,0), game),
-            new MetalWall(new Position(0,0)),
-            new ExitDoor(new Position(0,0))
+            new Wall(),
+            new Lemming(),
+            new MetalWall(),
+            new ExitDoor()
         );
 
         try {

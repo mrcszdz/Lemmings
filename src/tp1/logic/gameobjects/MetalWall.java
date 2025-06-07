@@ -16,6 +16,11 @@ import tp1.view.Messages;
 		super(pos);
 		}
     
+	public MetalWall() {
+		super(null);
+		}
+
+	
     public MetalWall deepCopy() {
         MetalWall copy = new MetalWall(pos);
         return copy;

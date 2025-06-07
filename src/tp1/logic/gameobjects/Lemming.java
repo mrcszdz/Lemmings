@@ -30,6 +30,10 @@ public class Lemming extends GameObject {
 		this.escaped = false;		
 	}
 	
+	public Lemming() {
+		super(null);
+	}
+	
     public Lemming deepCopy() {
         Lemming copy = new Lemming(pos, dir, caida, rol, game);
         return copy;

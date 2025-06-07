@@ -20,10 +20,6 @@ public abstract class GameObject implements GameItem {
 		this.vivo = true;
 	}
 	
-	public GameWorld getGame() {
-		return this.game;
-	}
-	
 	public boolean isVivo() {
         return vivo;
     }

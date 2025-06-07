@@ -16,6 +16,10 @@ import tp1.view.Messages;
 		super(pos);
 		}
 	
+	public Wall() {
+		super(null);
+	}
+	
     public Wall deepCopy() {
         Wall copy = new Wall(pos);
         return copy;
