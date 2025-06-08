@@ -37,7 +37,8 @@ public class SetRoleCommand extends Command {
 	public Command parse(String[] input) throws CommandParseException{
 		String command = input[0].toLowerCase();
 
-		if (this.matchCommand(command) && input.length==4) {
+		if (this.matchCommand(command)) {
+			if(input.length!=4) throw new CommandParseException(Messages.COMMAND_PARAMETERS_MISSING);
 			try {	
 				LemmingRole newRole = LemmingRoleFactory.parse(input[1]);
 				int row = (input[2].toUpperCase().charAt(0)-'A');

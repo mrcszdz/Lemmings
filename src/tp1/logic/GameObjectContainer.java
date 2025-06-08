@@ -301,13 +301,16 @@ public class GameObjectContainer {
 		}
 	}
 	
-	public List<GameObject> getObjects() {
-		List<GameObject> copy = new ArrayList<GameObject>();
-		for (int i=0; i<this.gameObjects.size(); i++) {
-			GameObject objectCopy = this.gameObjects.get(i).deepCopy();
-			copy.add(objectCopy);
-		}
-        return copy;
+	public void remove(GameObject object) {
+		gameObjects.remove(object);
+	}
+	
+	public GameObject get(int i) {
+		return gameObjects.get(i);
+	}
+	
+	public int size() {
+		return gameObjects.size();
 	}
 	
 	public void reset() {

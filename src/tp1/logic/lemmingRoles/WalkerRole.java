@@ -25,7 +25,7 @@ public class WalkerRole implements LemmingRole{
 	        if (lemming.getCaida() > 2) {
 	            lemming.setVivo(false);
 				lemming.getGame().lemmingDies();
-				lemming.getGame().getGameContainer().getObjects().remove(lemming);
+				lemming.getGame().getGameContainer().remove(lemming);
 	        } 
 			else {
 	            lemming.setCaida(0);
@@ -78,11 +78,10 @@ public class WalkerRole implements LemmingRole{
 	
 	public String getIcon( Lemming lemming ) {
 		String icon = "ᗺ";
-		List<GameObject> objects = lemming.getGame().getGameContainer().getObjects();
 		int count = 0;
 		
-		for	(int i = 0; i < objects.size(); i++) {
-			if(lemming.getPos().equals(objects.get(i).getPos()) && lemming!=objects.get(i)) {
+		for	(int i = 0; i < lemming.getGame().getGameContainer().size(); i++) {
+			if(lemming.getPos().equals(lemming.getGame().getGameContainer().get(i).getPos()) && lemming!= lemming.getGame().getGameContainer().get(i)) {
 				count++;
 			}
 		}

@@ -45,8 +45,8 @@ public class FileGameConfiguration implements GameConfiguration {
 
 	public GameObjectContainer getGameContainer() {
 		GameObjectContainer copy = new GameObjectContainer();
-		for (int i=0; i<gameObjectContainer.getObjects().size(); i++) {
-			GameObject objectCopy = gameObjectContainer.getObjects().get(i).deepCopy();
+		for (int i=0; i<gameObjectContainer.size(); i++) {
+			GameObject objectCopy = gameObjectContainer.get(i).deepCopy();
 			copy.add(objectCopy);
 		}
         return copy;

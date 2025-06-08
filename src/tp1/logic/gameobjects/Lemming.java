@@ -202,7 +202,7 @@ public class Lemming extends GameObject {
 
     public boolean interactWith(ExitDoor door) {
         if (this.isInPosition(door.getPos())) {
-            this.getGame().getGameContainer().getObjects().remove(this);
+            this.getGame().getGameContainer().remove(this);
             this.getGame().addEscaped();
             this.escaped = true;
             return true;

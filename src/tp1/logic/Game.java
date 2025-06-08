@@ -108,8 +108,8 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 			this.lemmingsToWin = this.conf.numLemmingsToWin();
 			this.escaped = this.conf.numLemmingsExit();
 			
-			for(int i = 0; i < this.conf.getGameContainer().getObjects().size(); i++) {
-				this.gameContainer.add(this.conf.getGameContainer().getObjects().get(i)); 
+			for(int i = 0; i < this.conf.getGameContainer().size(); i++) {
+				this.gameContainer.add(this.conf.getGameContainer().get(i)); 
 			}
 		}
 	}
@@ -168,21 +168,19 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 		this.lemmingsToWin = config.numLemmingsToWin();
 		this.escaped = config.numLemmingsExit();
 
-		for(int i = 0; i < config.getGameContainer().getObjects().size(); i++) {
-			this.gameContainer.add(config.getGameContainer().getObjects().get(i)); 
+		for(int i = 0; i < config.getGameContainer().size(); i++) {
+			this.gameContainer.add(config.getGameContainer().get(i)); 
 		}
 	}
 	
 	public boolean setRole(Position pos, LemmingRole role) throws offBoardException {
 	boolean success = false;
 	int i = 0;
-	
-	List<GameObject> objects = this.getGameContainer().getObjects();
      
 	if(pos.overflowX(Game.DIM_X) || pos.overflowY(Game.DIM_Y)) throw new offBoardException("Position %s off the board.".formatted(Messages.POSITION.formatted(pos.getRow(), pos.getCol())));
-	while (i < objects.size() && !success) {
-		if (pos.equals(objects.get(i).getPos())) {
-			success = objects.get(i).setRole(role);
+	while (i < this.gameContainer.size() && !success) {
+		if (pos.equals(this.gameContainer.get(i).getPos())) {
+			success = this.gameContainer.get(i).setRole(role);
 		}
 		i++;
     }
@@ -190,12 +188,11 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
     }
 	
 	public boolean isInAir(Position pos) {
-	    List<GameObject> objects = this.getGameContainer().getObjects();
 	    int i = 0;
 	    boolean inAir = true;
 	    
-	    while (i < objects.size() && inAir) {
-	        if (pos.translate(Direction.DOWN).equals(objects.get(i).getPos()) && objects.get(i).isSolid()) {
+	    while (i < gameContainer.size() && inAir) {
+	        if (pos.translate(Direction.DOWN).equals(gameContainer.get(i).getPos()) && gameContainer.get(i).isSolid()) {
 	            inAir = false;
 	        }
 	        i++;
@@ -217,12 +214,11 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 		String org = Messages.EMPTY;
 		String lemmins = "";
 		Position targetPos = new Position(col, row);
-		List<GameObject> objects = this.getGameContainer().getObjects();
 		
-		for (int i=0; i<objects.size();i++) {
-			found  = objects.get(i).getPos().equals(targetPos);
+		for (int i=0; i<gameContainer.size();i++) {
+			found  = gameContainer.get(i).getPos().equals(targetPos);
 			if(found) {
-				String c = objects.get(i).toString();
+				String c = gameContainer.get(i).toString();
 				ret += c;
 				if ((c=="B") || (c =="ᗺ")) {
 					lemmins += c;

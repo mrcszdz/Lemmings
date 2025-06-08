@@ -24,7 +24,7 @@ public class DownCaverRole implements LemmingRole{
 	        if (lemming.getCaida() > 2) {
 	            lemming.setVivo(false);
 				lemming.getGame().lemmingDies();
-				lemming.getGame().getGameContainer().getObjects().remove(lemming);
+				lemming.getGame().getGameContainer().remove(lemming);
 	        } 
 	    }
 	    this.caer(lemming);
