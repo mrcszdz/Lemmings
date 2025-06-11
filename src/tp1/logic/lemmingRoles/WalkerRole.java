@@ -97,7 +97,7 @@ public class WalkerRole implements LemmingRole{
 	public boolean interactWith(Wall wall, Lemming lemming) {
 		Position newPos = lemming.getPos().translate(lemming.getDir());
         boolean collision = newPos.equals(wall.getPos());
-		if(!lemming.getDir().equals(Direction.DOWN)) {
+		if(!lemming.getGame().isInAir(lemming.getPos()) && lemming.getCaida() == 0) {
         if (collision) {
 			if (lemming.getDir() == Direction.LEFT) {
 				lemming.setDir(Direction.RIGHT);

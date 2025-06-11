@@ -19,9 +19,7 @@ public class ParachuteRole implements LemmingRole {
 	    boolean cayendo = lemming.getGame().isInAir(pos);
 
 	    if (!cayendo) {
-			lemming.setCaida(0);
-            lemming.disableRole();
-            lemming.getRol().play(lemming);
+			
 	    } else {
 	        this.caer(lemming);
 	    }
@@ -65,7 +63,15 @@ public class ParachuteRole implements LemmingRole {
 		return false;
 	}
 	public boolean interactWith(Wall wall, Lemming lemming) {
-		return false;
+		Position newPos = lemming.getPos().translate(Direction.DOWN);
+        boolean collision = newPos.equals(wall.getPos());
+        if(collision) {
+        	lemming.setCaida(0);
+            lemming.disableRole();
+            if(!lemming.getGame().getGameContainer().receiveInteractionsFrom(lemming))
+            lemming.getRol().play(lemming);
+        }
+        return collision;
 	}
 	public boolean interactWith(ExitDoor door, Lemming lemming) {
 		return false;

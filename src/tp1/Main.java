@@ -22,7 +22,7 @@ public class Main {
 		// Locale.of("es", "ES");
 		// You can replace the following line by the previous line if using Java21
 		Locale.setDefault(new Locale("es", "ES"));
-		int nLevel = 00;
+		int nLevel = 02;
 		try {
 			if (args.length != 0) nLevel = Integer.parseInt(args[0]);
 
