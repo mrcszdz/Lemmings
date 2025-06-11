@@ -168,6 +168,7 @@ public class Lemming extends GameObject {
             if (!interaction) {
                 this.rol.play(this);
             }
+            if(!this.vivo) game.lemmingDies();
 		}
 	}
 
@@ -183,7 +184,8 @@ public class Lemming extends GameObject {
 	 
     @Override
     public boolean setRole(LemmingRole role) {
-        this.rol = role;
+       if(this.rol.toString() == role.toString()) return false;
+    	this.rol = role;
         return true;
     }
 	
@@ -196,13 +198,14 @@ public class Lemming extends GameObject {
     }
 
     public boolean interactWith(Wall wall) {
+    	Boolean vuelta;
        if(this.getGame().isInAir(this.pos)) return false;
-       else return this.rol.interactWith(wall, this);
+       else  vuelta = this.rol.interactWith(wall, this);
+       return vuelta;
     };
 
     public boolean interactWith(ExitDoor door) {
         if (this.isInPosition(door.getPos())) {
-            this.getGame().getGameContainer().remove(this);
             this.getGame().addEscaped();
             this.escaped = true;
             return true;
@@ -225,7 +228,7 @@ public class Lemming extends GameObject {
         return true;
     }
 	public boolean isExit() {
-        return true;
+        return this.escaped;
     }
 	public boolean isInPosition(Position pos) {
         return this.pos.equals(pos);

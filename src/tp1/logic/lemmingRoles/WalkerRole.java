@@ -24,8 +24,6 @@ public class WalkerRole implements LemmingRole{
 	    if (!cayendo) {
 	        if (lemming.getCaida() > 2) {
 	            lemming.setVivo(false);
-				lemming.getGame().lemmingDies();
-				lemming.getGame().getGameContainer().remove(lemming);
 	        } 
 			else {
 	            lemming.setCaida(0);
@@ -38,37 +36,36 @@ public class WalkerRole implements LemmingRole{
 	public void start( Lemming lemming ) {
 
 	}
+	
 	public void caer(Lemming lemming) {
 		lemming.setCaida(lemming.getCaida()+1);
 		this.move(lemming);
 	}
 	public void move(Lemming lemming) {
-		Position newPos;
-		if(lemming.getCaida() != 0) {
+		Position newPos = new Position();
+		if(lemming.getGame().isInAir(lemming.getPos())) {
             newPos = lemming.getPos().translate(Direction.DOWN);
 		}
 		
-		else {
-			newPos = lemming.getPos().translate(lemming.getDir());
-		}
-		
-		if(newPos.overflowY(Game.DIM_Y)) {
+			else if(lemming.isVivo()) {
+				newPos = lemming.getPos().translate(lemming.getDir());
+			}
 			
-			lemming.setVivo(false);
-			lemming.getGame().lemmingDies();
-		}
-		else if(newPos.overflowX(Game.DIM_X - 1)) {
-			if (lemming.getDir() == Direction.LEFT) {
-				lemming.setDir(Direction.RIGHT);
+			if(newPos.overflowY(Game.DIM_Y)) {	
+				lemming.setVivo(false);
 			}
+			else if(newPos.overflowX(Game.DIM_X - 1)) {
+				if (lemming.getDir() == Direction.LEFT) {
+					lemming.setDir(Direction.RIGHT);
+				}
+				else {
+					lemming.setDir(Direction.LEFT);
+				}
+			}
+			
 			else {
-				lemming.setDir(Direction.LEFT);
+				lemming.setPos(newPos);
 			}
-		}
-		
-		else {
-			lemming.setPos(newPos);
-		}
 	}
 	
 	@Override
@@ -100,15 +97,18 @@ public class WalkerRole implements LemmingRole{
 	public boolean interactWith(Wall wall, Lemming lemming) {
 		Position newPos = lemming.getPos().translate(lemming.getDir());
         boolean collision = newPos.equals(wall.getPos());
-		if (collision) {
+		if(!lemming.getDir().equals(Direction.DOWN)) {
+        if (collision) {
 			if (lemming.getDir() == Direction.LEFT) {
 				lemming.setDir(Direction.RIGHT);
 			}
-			else {
+			else if(lemming.getDir()== Direction.RIGHT){
 				lemming.setDir(Direction.LEFT);
 			}
 		}
 		return collision;
+		}
+		return false;
 	}
 	public boolean interactWith(ExitDoor door, Lemming lemming) {
 		return false;

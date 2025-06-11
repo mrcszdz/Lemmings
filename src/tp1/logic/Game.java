@@ -6,6 +6,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import tp1.exceptions.CommandExecuteException;
 import tp1.exceptions.GameLoadException;
 import tp1.exceptions.ObjectParseException;
 import tp1.exceptions.offBoardException;
@@ -23,7 +24,7 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 	private int nLevel;
 	private int cycle;
 	private GameObjectContainer gameContainer;
-	private Direction spawnDir; 
+	private Direction spawnDir = Direction.RIGHT; 
 	private int escaped = 0;
 	private int maxLemmingsDead = 5;
 	private int lemmingsToWin = 2;
@@ -38,49 +39,25 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 	}
 	
 	public void initGame() {
-		if(this.nLevel == 1) {
-			this.gameContainer.initGame1();
-			
-			this.spawnDir = Direction.RIGHT;
-			
-			Position pos1 = new Position(2,3);
-			Lemming lemming1 = new Lemming(pos1, this);
-			this.gameContainer.add(lemming1);
-			this.lemmingsAlive ++;
-			
-			Position pos2 = new Position(9,0);
-			Lemming lemming2 = new Lemming(pos2, this);
-			this.gameContainer.add(lemming2);
-			this.lemmingsAlive ++;
-			
-			Position pos3 = new Position(0,8);
-			Lemming lemming3 = new Lemming(pos3, this);
-			this.gameContainer.add(lemming3);
-			this.lemmingsAlive ++;
-			
-			Position pos4 = new Position(3,3);
-			Lemming lemming4 = new Lemming(pos4, this);
-			this.gameContainer.add(lemming4);
-			this.lemmingsAlive ++;
+		
+		if(this.nLevel == 00) {
+			this.gameContainer.initGame0(this);
+			lemmingsAlive = 3;
 		}
-		else if(this.nLevel == 2) {
-			this.gameContainer.initGame2();
+		else if(this.nLevel == 01) {
+			this.gameContainer.initGame1(this);
+			lemmingsAlive = 4;
 		}
 		
-		else if(this.nLevel == 3) {
-			this.gameContainer.initGame3();
-		}
-		
-		else if(this.nLevel == 4) {
-			this.gameContainer.initGame4();
-		}
-		
-		else if(this.nLevel == 5) {
-			this.gameContainer.initGame5();
+		else if(this.nLevel == 02) {
+			this.gameContainer.initGame2(this);
+			lemmingsAlive = 6;
 		}
 		
 		else{
-			this.gameContainer.initGame0();
+			this.gameContainer.initGame1(this);
+			lemmingsAlive = 3;
+			
 		}
 	}
 	
@@ -97,7 +74,6 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 			this.cycle = 0;
 			this.gameContainer.reset();
 			this.initGame();
-			System.out.println("Game reseted!");
 		} 
 		else {
 			this.gameContainer = new GameObjectContainer();
@@ -117,7 +93,7 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 	public void update() {
 		this.gameContainer.update();
 		this.cycle ++;
-		this.play = !this.playerLooses() && !this.playerWins();
+		this.play = numLemmingsInBoard() != 0;
 	}
 	
 	@Override
@@ -176,7 +152,7 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 	public boolean setRole(Position pos, LemmingRole role) throws offBoardException {
 	boolean success = false;
 	int i = 0;
-     
+
 	if(pos.overflowX(Game.DIM_X) || pos.overflowY(Game.DIM_Y)) throw new offBoardException("Position %s off the board.".formatted(Messages.POSITION.formatted(pos.getRow(), pos.getCol())));
 	while (i < this.gameContainer.size() && !success) {
 		if (pos.equals(this.gameContainer.get(i).getPos())) {
@@ -243,6 +219,6 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 	}
 
 	public boolean playerLooses() {
-		return this.numLemmingsDead() >= this.maxLemmingsDead || this.numLemmingsInBoard() == 0;
+		return this.numLemmingsDead() >= this.maxLemmingsDead || (this.numLemmingsInBoard() == 0 && this.escaped < this.numLemmingsToWin());
 	}
 }

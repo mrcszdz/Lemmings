@@ -55,14 +55,11 @@ public class FileGameConfiguration implements GameConfiguration {
 	public String getFileName() {
 		return fileName;
 	}
-
-	public GameWorld getGame() {
-		return game;
-	}
 	
 	public FileGameConfiguration() {
 
 	}
+	
 	public FileGameConfiguration(String fileName, GameWorld game) throws GameLoadException{
 		String[] objectInfo;
 		String line;

@@ -20,6 +20,8 @@ public class CommandGenerator {
     
     public static Command parse(String[] commandWords) throws CommandParseException {
     		int i = 0;
+    		
+
             while (i < AVAILABLE_COMMANDS.size() &&
             		AVAILABLE_COMMANDS.get(i).parse(commandWords) == null) {
             	i++;
@@ -32,7 +34,7 @@ public class CommandGenerator {
     public static String commandHelp() {
     	String help = Messages.HELP_AVAILABLE_COMMANDS + "\n";
     	for (int i = 0; i < AVAILABLE_COMMANDS.size(); i++) {
-    		help += "\t"+AVAILABLE_COMMANDS.get(i).getDetails() + ": " + AVAILABLE_COMMANDS.get(i).getHelp() + "\n";
+    		help += "   "+AVAILABLE_COMMANDS.get(i).getDetails() + ": " + AVAILABLE_COMMANDS.get(i).getHelp() + "\n";
     	}
     	return help;
     }

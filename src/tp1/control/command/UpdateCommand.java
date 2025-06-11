@@ -18,10 +18,11 @@ import tp1.view.Messages;
 	}
 
 	protected boolean matchCommand(String type) {
-		return type.equals("n") 
-		|| type.equals("none") 
-		|| type.equals(" ") 
-		|| type.equals("");
+		String com = type.toLowerCase();
+		return com.equals("n") 
+		|| com.equals("none") 
+		|| com.equals(" ") 
+		|| com.equals("");
 	}
 	
 	

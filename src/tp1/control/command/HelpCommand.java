@@ -17,7 +17,8 @@ public class HelpCommand extends NoParamsCommand {
 	}
 
 	protected boolean matchCommand(String type) {
-		return type.equals("h") || type.equals("help");
+		String com = type.toLowerCase();
+		return com.equals("h") || com.equals("help");
 	}
 	
 	

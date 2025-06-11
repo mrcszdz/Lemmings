@@ -16,7 +16,8 @@ public class ResetCommand extends NoParamsCommand {
 	}
 
 	protected boolean matchCommand(String type) {
-		return type.equals("r") || type.equals("reset");
+		String com = type.toLowerCase();
+		return com.equals("r") || com.equals("reset");
 	}
 	
 	public void execute(GameModel game, GameView gameView) {

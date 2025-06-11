@@ -26,7 +26,7 @@ public class Messages {
 	public static final String NUMBER_OF_CYCLES = "Number of cycles: %s";
 	public static final String NUM_LEMMINGS = "Lemmings in board: %s";
 	public static final String DEAD_LEMMINGS = "Dead lemmings: %s";
-	public static final String EXIT_LEMMINGS = "Lemmings exit door: %s | %s";
+	public static final String EXIT_LEMMINGS = "Lemmings exit door: %s ┃%s";
 
 	// GAME END MESSAGE
 	public static final String GAME_OVER = "Game over";
@@ -104,7 +104,7 @@ public class Messages {
 	public static final String COMMAND_RESET_NAME = "reset";
 	public static final String COMMAND_RESET_SHORTCUT = "r";
 	public static final String COMMAND_RESET_DETAILS = "[r]eset";
-	public static final String COMMAND_RESET_HELP = "reset the game";
+	public static final String COMMAND_RESET_HELP = "start a new game";
 	
 //Roles
 	public static final String WALKER_ROL_SYMBOL = "W";

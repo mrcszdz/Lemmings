@@ -12,7 +12,7 @@ import tp1.view.Messages;
 
 public class ParachuteRole implements LemmingRole {
 	public boolean parse(String input) {
-		return input.toLowerCase().equals("p") || input.toLowerCase().equals("parachute");
+		return input.toLowerCase().equals("p") || input.toLowerCase().equals("parachuter");
 	}
 	public void play(Lemming lemming) {
 	    Position pos = lemming.getPos();
@@ -21,6 +21,7 @@ public class ParachuteRole implements LemmingRole {
 	    if (!cayendo) {
 			lemming.setCaida(0);
             lemming.disableRole();
+            lemming.getRol().play(lemming);
 	    } else {
 	        this.caer(lemming);
 	    }

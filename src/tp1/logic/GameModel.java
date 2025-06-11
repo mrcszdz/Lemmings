@@ -1,5 +1,6 @@
 package tp1.logic;
 
+import tp1.exceptions.CommandExecuteException;
 import tp1.exceptions.GameLoadException;
 import tp1.exceptions.offBoardException;
 import tp1.logic.lemmingRoles.LemmingRole;

@@ -25,7 +25,12 @@ public class Position {
 		this.row = pos.row;
 	}
 	
-	 public int getCol() {
+	 public Position() {
+		col = 0;
+		row = 0;
+	}
+
+	public int getCol() {
 		 return this.col;
     }
 
@@ -41,7 +46,7 @@ public class Position {
     }
 	
 	public boolean overflowY( int maxY) {
-		return ((this.row < 0) || (this.row > maxY));
+		return ((this.row < 0) || (this.row >= maxY));
 	}
 	
 	public boolean overflowX(int maxX) {

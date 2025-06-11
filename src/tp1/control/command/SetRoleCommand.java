@@ -20,10 +20,10 @@ public class SetRoleCommand extends Command {
 	private static final String NAME = "setrole";
 	private static final String SHORTCUT = "sr";
 	private static final String DETAILS =  "[s]et[R]ole ROLE ROW COL";
-	private static final String HELP = "sets the lemming in position (ROW,COL) to role ROLE\r\n" + 
-                "\t\t[P]arachuter: Lemming falls with a parachute\r\n" +
-                "\t\t[W]alker: Lemming that walks\n" +
-                "\t\t[D]own[C]aver: Lemming caves downwards";
+	private static final String HELP = "sets the lemming in position (ROW,COL) to role ROL\r\n" + 
+				"      [D]own [C]aver: Lemming caves downwards\n" +
+                 "      [P]arachuter: Lemming falls with a parachute\r\n" +
+                "      [W]alker: Lemming that walks";
     private Position position;
     private LemmingRole role;
 
@@ -38,7 +38,7 @@ public class SetRoleCommand extends Command {
 		String command = input[0].toLowerCase();
 
 		if (this.matchCommand(command)) {
-			if(input.length!=4) throw new CommandParseException(Messages.COMMAND_PARAMETERS_MISSING);
+			if(input.length!=4) throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
 			try {	
 				LemmingRole newRole = LemmingRoleFactory.parse(input[1]);
 				int row = (input[2].toUpperCase().charAt(0)-'A');
@@ -59,7 +59,8 @@ public class SetRoleCommand extends Command {
 	}
 
     protected boolean matchCommand(String type) {
-		return type.equals("s") || type.equals("sr") || type.equals("setrole");
+    	String com = type.toLowerCase();
+		return com.equals("s") || com.equals("sr") || com.equals("setrole");
 	}
 	
 	public void execute(GameModel game, GameView gameView) throws CommandExecuteException{
@@ -68,14 +69,13 @@ public class SetRoleCommand extends Command {
 	    }
 
 	    if (this.position.overflowX(Game.DIM_X) || this.position.overflowY(Game.DIM_Y)) {
-	        throw new CommandExecuteException("SetRoleCommand error (Incorrect position or no object in that position admits that role)");
+	        throw new CommandExecuteException(Messages.ERROR.formatted("Position " + Messages.POSITION.formatted(position.getRow(), position.getCol()) + " is off board"));
 	    }
         
         try{
 			if (game.setRole(this.position, this.role)) {
 				game.update();
         		gameView.showGame();
-				System.out.println("Successfully set new role");
 			}
         	else {
 				System.out.println(Messages.ERROR.formatted("No lemming in position %s admits role %s".formatted(Messages.POSITION.formatted(position.getRow(), position.getCol()), role)));

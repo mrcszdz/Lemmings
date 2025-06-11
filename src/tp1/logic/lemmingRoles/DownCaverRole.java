@@ -23,9 +23,11 @@ public class DownCaverRole implements LemmingRole{
 	    if (!cayendo) {
 	        if (lemming.getCaida() > 2) {
 	            lemming.setVivo(false);
-				lemming.getGame().lemmingDies();
-				lemming.getGame().getGameContainer().remove(lemming);
 	        } 
+	    }
+	    
+	    else {
+	    	lemming.disableRole();
 	    }
 	    this.caer(lemming);
 	}
@@ -50,7 +52,6 @@ public class DownCaverRole implements LemmingRole{
 
 		if(newPos.overflowY( Game.DIM_Y)) {
 			lemming.setVivo(false);
-			lemming.getGame().lemmingDies();
 		}
 	}
 	
@@ -78,6 +79,7 @@ public class DownCaverRole implements LemmingRole{
 		boolean unbreakable = newPos.equals(wall.getPos());
 		if (unbreakable) {
 			lemming.disableRole();
+	    	lemming.getRol().play(lemming);
 		}
 		return unbreakable;
 	}

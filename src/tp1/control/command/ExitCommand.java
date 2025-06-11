@@ -18,7 +18,8 @@ public class ExitCommand  extends NoParamsCommand {
 		}
 
 		protected boolean matchCommand(String type) {
-			return type.equals("e") || type.equals("exit");
+			String com = type.toLowerCase();
+			return com.equals("e") || com.equals("exit");
 		}
 	
 	

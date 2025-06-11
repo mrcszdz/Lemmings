@@ -94,7 +94,7 @@ public class ExitDoor extends GameObject {
         return true;
     }
 	public boolean isExit() {
-        return true;
+        return false;
     }
 	public boolean isInPosition(Position pos) {
         return true;
