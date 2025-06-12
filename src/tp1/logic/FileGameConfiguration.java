@@ -90,7 +90,7 @@ public class FileGameConfiguration implements GameConfiguration {
 			}	
 		} 
 		catch (FileNotFoundException fnf) { 
-			throw new GameLoadException("File not found " + fileName);
+			throw new GameLoadException("File not found: \""+ fileName +"\"");
 		}
 		catch (offBoardException e) {
 			throw new GameLoadException(e.getMessage());

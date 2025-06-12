@@ -23,7 +23,7 @@ Lemmings exit door: 0 ┃2
 Command > [DEBUG] Executing: load conf
 
 [ERROR] Error: Invalid file "conf" configuration
-[ERROR] Error: File not found conf
+[ERROR] Error: File not found: "conf"
 
 
 Command > [DEBUG] Executing: load conf_2
@@ -64,30 +64,14 @@ Command > [DEBUG] Executing: load conf_7
 
 Command > [DEBUG] Executing: load conf_8
 
-Number of cycles: 2
-Lemmings in board: 1
-Dead lemmings: 0
-Lemmings exit door: 3 ┃5
+[ERROR] Error: Invalid file "conf_8" configuration
+[ERROR] Error: Object position is off board: (32,3)
 
-      1    2    3    4    5    6    7    8    9   10  
-   ┌——————————————————————————————————————————————————┐
-  A┃                 B                                ┃A
-  B┃                                                  ┃B
-  C┃                                                  ┃C
-  D┃                                                  ┃D
-  E┃                                                  ┃E
-  F┃                                                  ┃F
-  G┃                                                  ┃G
-  H┃                                                  ┃H
-  I┃                                                  ┃I
-  J┃                                                  ┃J
-   └——————————————————————————————————————————————————┘
-      1    2    3    4    5    6    7    8    9   10  
 
 Command > [DEBUG] Executing: load conf_9
 
 [ERROR] Error: Invalid file "conf_9" configuration
-[ERROR] Error: File not found conf_9
+[ERROR] Error: File not found: "conf_9"
 
 
 Command > [DEBUG] Executing: load conf_0
