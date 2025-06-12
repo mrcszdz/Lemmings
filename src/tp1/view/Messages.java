@@ -4,7 +4,7 @@ import tp1.util.MyStringUtils;
 
 public class Messages {
 	
-	public static final String VERSION = "2.2";
+	public static final String VERSION = "3.0";
 
 	public static final String GAME_NAME = "Lemmings";
 
@@ -104,7 +104,7 @@ public class Messages {
 	public static final String COMMAND_RESET_NAME = "reset";
 	public static final String COMMAND_RESET_SHORTCUT = "r";
 	public static final String COMMAND_RESET_DETAILS = "[r]eset";
-	public static final String COMMAND_RESET_HELP = "start a new game";
+	public static final String COMMAND_RESET_HELP = "reset the game to initial configuration";
 	
 //Roles
 	public static final String WALKER_ROL_SYMBOL = "W";

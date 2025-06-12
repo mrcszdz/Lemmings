@@ -239,14 +239,16 @@ public class GameObjectContainer {
 	}
 
 	public void update() {
+		List<GameObject> eliminados = new ArrayList<GameObject>();
 		for (int i=0; i<this.gameObjects.size(); i++) {
 			this.gameObjects.get(i).update();
 		}
 		for (int i=0; i<this.gameObjects.size(); i++) {
 			if (!this.gameObjects.get(i).isVivo() || this.gameObjects.get(i).isExit()) {
-				this.gameObjects.remove(i);
+				eliminados.add(this.gameObjects.get(i))	;	
 			}
 		}
+		this.gameObjects.removeAll(eliminados);
 	}
 	
 	public void remove(GameObject object) {

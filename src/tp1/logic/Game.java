@@ -63,7 +63,6 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 	
 	public void exit() {
 		this.play = false;
-		System.out.println("Exiting game ...");
 	}
 	
 	public void reset() {

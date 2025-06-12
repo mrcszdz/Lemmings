@@ -20,7 +20,7 @@ public class SetRoleCommand extends Command {
 	private static final String NAME = "setrole";
 	private static final String SHORTCUT = "sr";
 	private static final String DETAILS =  "[s]et[R]ole ROLE ROW COL";
-	private static final String HELP = "sets the lemming in position (ROW,COL) to role ROL\r\n" + 
+	private static final String HELP = "sets the lemming in position (ROW,COL) to role ROLE\r\n" + 
 				"      [D]own [C]aver: Lemming caves downwards\n" +
                  "      [P]arachuter: Lemming falls with a parachute\r\n" +
                 "      [W]alker: Lemming that walks";
@@ -49,10 +49,10 @@ public class SetRoleCommand extends Command {
 				return this;
 				}	
 			catch (NumberFormatException e) {
-				throw new CommandParseException(Messages.INVALID_POSITION.formatted(Messages.POSITION.formatted((input[2]).toString(), input[3].toString())));
+				throw new CommandParseException(Messages.INVALID_POSITION.formatted(Messages.POSITION.formatted((input[2]).toString(), input[3].toString())), e);
 				} 
 			catch (RoleParseException e) {
-				throw new CommandParseException(e.getMessage());
+				throw new CommandParseException("Invalid command parameters", e);
 			}
 			}
 		return null;
@@ -67,10 +67,6 @@ public class SetRoleCommand extends Command {
 		if (this.role == null) {
 	        throw new CommandExecuteException("Unknown Role");
 	    }
-
-	    if (this.position.overflowX(Game.DIM_X) || this.position.overflowY(Game.DIM_Y)) {
-	        throw new CommandExecuteException(Messages.ERROR.formatted("Position " + Messages.POSITION.formatted(position.getRow(), position.getCol()) + " is off board"));
-	    }
         
         try{
 			if (game.setRole(this.position, this.role)) {
@@ -81,8 +77,9 @@ public class SetRoleCommand extends Command {
 				System.out.println(Messages.ERROR.formatted("No lemming in position %s admits role %s".formatted(Messages.POSITION.formatted(position.getRow(), position.getCol()), role)));
 			}
         }catch (GameModelException obe) {
-        	throw new CommandExecuteException(obe.getMessage());
+        	throw new CommandExecuteException("Command execute problem", obe);
         }
+        
         
         this.position = null;
         this.role = null;
