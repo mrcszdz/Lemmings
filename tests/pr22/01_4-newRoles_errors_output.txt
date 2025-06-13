@@ -26,7 +26,9 @@ Command > [DEBUG] Executing: setRole Walker I 2 33
 
 Command > [DEBUG] Executing: setRole Patata I 2
 
-[ERROR] Error: Invalid lemming role: Patata
+[ERROR] Error: Invalid command parameters
+
+[ERROR] Error: Unknown role: Patata
 
 Command > [DEBUG] Executing: sEtROle Walker I 1
 
@@ -42,12 +44,15 @@ Command > [DEBUG] Executing: setRole Parachuter A 1
 
 Command > [DEBUG] Executing: setRole Parachuter A 100
 
-[ERROR] Error: [ERROR] Error: Position (0,99) is off board
+[ERROR] Error: Command execute problem
 
+[ERROR] Error: Position (0,99) off the board.
 
 Command > [DEBUG] Executing: setRole Parachu A 10
 
-[ERROR] Error: Invalid lemming role: Parachu
+[ERROR] Error: Invalid command parameters
+
+[ERROR] Error: Unknown role: Parachu
 
 Command > [DEBUG] Executing: sEtROle doWnCaVer A 10
 
@@ -275,5 +280,4 @@ Lemmings exit door: 2 ┃2
 
 Command > [DEBUG] Executing: exit
 
-Exiting game ...
-Player wins!
+Player leaves the game

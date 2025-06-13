@@ -63,7 +63,7 @@ public class ParachuteRole implements LemmingRole {
 		return false;
 	}
 	public boolean interactWith(Wall wall, Lemming lemming) {
-		Position newPos = lemming.getPos().translate(Direction.DOWN);
+		Position newPos = lemming.getPos().translate(Direction.DOWN);D
         boolean collision = newPos.equals(wall.getPos());
         if(collision) {
         	lemming.setCaida(0);

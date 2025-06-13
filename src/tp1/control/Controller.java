@@ -41,6 +41,7 @@ public class Controller {
 	 			Throwable cause = e.getCause();
 	 			if (cause != null) 
 	 			    view.showError(cause.getMessage());
+	 		//	System.out.println("\n");
 			}
 		}
 		this.view.showEndMessage();

@@ -28,7 +28,7 @@ Command > [DEBUG] Executing: setRole Patata I 2
 
 [ERROR] Error: Invalid command parameters
 
-[ERROR] Error: Unknown role: Patata
+[ERROR] Error: Unknown role: 
 
 Command > [DEBUG] Executing: sEtROle Walker I 1
 
@@ -52,7 +52,7 @@ Command > [DEBUG] Executing: setRole Parachu A 10
 
 [ERROR] Error: Invalid command parameters
 
-[ERROR] Error: Unknown role: Parachu
+[ERROR] Error: Unknown role: 
 
 Command > [DEBUG] Executing: sEtROle doWnCaVer A 10
 
@@ -280,4 +280,4 @@ Lemmings exit door: 2 ┃2
 
 Command > [DEBUG] Executing: exit
 
-Player wins!
+Player leaves the game

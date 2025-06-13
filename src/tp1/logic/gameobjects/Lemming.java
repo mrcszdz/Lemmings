@@ -58,10 +58,10 @@ public class Lemming extends GameObject {
 			return lemming;
 		}
 		catch(ObjectParseException e) {
-			throw new ObjectParseException(e.getMessage());
+			throw new ObjectParseException(e.getMessage() + String.join(" ", line));
 		}
 		catch(offBoardException e) {
-			throw new offBoardException(e.getMessage());
+			throw new offBoardException(e.getMessage() + String.join(" ", line));
 		}
 	}
 
@@ -82,22 +82,22 @@ public class Lemming extends GameObject {
         } 
         else if (letterPattern.matcher(line).matches()) {
             try {
-                row = line.split(",")[0].substring(1).toUpperCase().charAt(0)-'A';
+                row = line.split(",")[0].substring(1).charAt(0)-'A';
                 col = Integer.parseInt(line.split(",")[1].substring(0, line.split(",")[1].length() - 1));
             }
             catch (NumberFormatException e) {
-                throw new ObjectParseException("Invalid coordinate format: " + line);
+                throw new ObjectParseException("Invalid coordinate format: ");
             }
         } 
         else {
-            throw new ObjectParseException("Incorrect position format: " + line);
+            throw new ObjectParseException("Incorrect position format: ");
         }
     
         pos = new Position(col, row);
     
         // Validate if position is within the board dimensions
         if (pos.overflowX(Game.DIM_X) || pos.overflowY(Game.DIM_Y)) {
-            throw new offBoardException("Object position is off board: %s".formatted(Messages.POSITION.formatted(pos.getRow(), pos.getCol())));
+            throw new offBoardException("Object position is off board: ");
         }
     
         return pos;
@@ -106,8 +106,8 @@ public class Lemming extends GameObject {
 	 private static Direction getLemmingDirectionFrom(String line) throws ObjectParseException { 
 		 if(line.equals("RIGHT")) return Direction.RIGHT;
 		 else if(line.equals("LEFT")) return Direction.LEFT;
-         else if (line.equals("UP") || line.equals("DOWN")) throw new ObjectParseException ("Invalid lemming direction: "+line);
-		 else throw new ObjectParseException ("Unknown object direction: "+line);
+         else if (line.equals("UP") || line.equals("DOWN")) throw new ObjectParseException ("Invalid lemming direction: ");
+		 else throw new ObjectParseException ("Unknown object direction: ");
 	}
 	
 	 private static int getLemmingHeigthFrom(String line) throws ObjectParseException {
@@ -119,7 +119,7 @@ public class Lemming extends GameObject {
                 return line.charAt(0) - 'A';
             }
             else {
-                throw new ObjectParseException("Invalid height format : "+line);
+                throw new ObjectParseException("Invalid height format : ");
             }
         }
 	 }
@@ -199,14 +199,14 @@ public class Lemming extends GameObject {
 
     public boolean interactWith(Wall wall) {
     	Boolean vuelta;
-       if(this.getGame().isInAir(this.pos)) return false;
+       if(this.game.isInAir(this.pos)) return false;
        else  vuelta = this.rol.interactWith(wall, this);
        return vuelta;
     };
 
     public boolean interactWith(ExitDoor door) {
         if (this.isInPosition(door.getPos())) {
-            this.getGame().addEscaped();
+            this.game.addEscaped();
             this.escaped = true;
             return true;
         } 

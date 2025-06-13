@@ -227,5 +227,4 @@ Lemmings exit door: 0 ┃2
 
 Command > [DEBUG] Executing: e
 
-Exiting game ...
 Player leaves the game

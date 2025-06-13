@@ -15,8 +15,9 @@ import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
-import tp1.control.commands.NoParamsCommand;
-import tp1.control.commands.ResetCommand;
+import tp1.control.command.NoParamsCommand;
+import tp1.control.command.ResetCommand;
+
 
 public class Tests_V3_1 {
 	public static final String DIR =

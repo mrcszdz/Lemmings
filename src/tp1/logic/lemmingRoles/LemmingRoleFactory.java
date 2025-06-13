@@ -20,6 +20,6 @@ public class LemmingRoleFactory {
         }
          if (i < AVAILABLE_ROLES.size())  
         	 return AVAILABLE_ROLES.get(i); 
-        	 else throw new RoleParseException("Unknown role: "+input); 
+        	 else throw new RoleParseException("Unknown role: "); 
     }  
 }

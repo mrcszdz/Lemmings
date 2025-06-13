@@ -42,7 +42,7 @@ public void execute(GameModel game, GameView gameView) throws CommandExecuteExce
 		gameView.showGame();
 	}
 	catch(GameLoadException e){
-		throw new CommandExecuteException("Invalid file \""+this.fileName+"\" configuration\n"+Messages.ERROR.formatted(e.getMessage()));
+		throw new CommandExecuteException("Invalid file \""+this.fileName+"\" configuration", e);
 	}
 	
 	}

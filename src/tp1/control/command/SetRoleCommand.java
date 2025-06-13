@@ -41,7 +41,7 @@ public class SetRoleCommand extends Command {
 			if(input.length!=4) throw new CommandParseException(Messages.COMMAND_INCORRECT_PARAMETER_NUMBER);
 			try {	
 				LemmingRole newRole = LemmingRoleFactory.parse(input[1]);
-				int row = (input[2].toUpperCase().charAt(0)-'A');
+				int row = (input[2].charAt(0)-'A');
 				int col = Integer.parseInt(input[3])-1;
 				Position newPos = new Position(col, row);
 				this.role = newRole;

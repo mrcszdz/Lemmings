@@ -32,7 +32,7 @@ public class GameObjectFactory {
                     throw new offBoardException(e.getMessage());
                 }
             } else {
-                throw new ObjectParseException("Unknown game object: " + input[1]);
+                throw new ObjectParseException("Unknown game object: " + String.join(" ", input));
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ObjectParseException("Error parsing object: Invalid input format", e);

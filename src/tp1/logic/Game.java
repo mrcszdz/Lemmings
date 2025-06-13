@@ -133,9 +133,9 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 	}
 
 	public void load(String fileName) throws GameLoadException {
-		this.gameContainer = new GameObjectContainer();
 
 		FileGameConfiguration config = new FileGameConfiguration(fileName, this);
+		this.gameContainer = new GameObjectContainer();
 		this.conf = config;
 		this.cycle = config.getCycle();
 		this.lemmingsAlive = config.numLemmingsInBoard();
@@ -214,7 +214,7 @@ public class Game implements GameModel, GameStatus, GameWorld, GameConfiguration
 	}
 
 	public boolean playerWins() {
-		return this.escaped >= this.numLemmingsToWin();
+		return this.escaped >= this.numLemmingsToWin() && this.numLemmingsInBoard() == 0;
 	}
 
 	public boolean playerLooses() {
